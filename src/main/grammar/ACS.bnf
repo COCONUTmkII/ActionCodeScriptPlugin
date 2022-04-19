@@ -10,12 +10,12 @@
   psiImplClassSuffix="Impl"
   psiPackage="by.home.acs.language.psi"
   psiImplPackage="by.home.acs.language.psi.impl"
-  elementTypeFactory="by.home.acs.language.psi.ACSType.createTypes"
+  elementTypeFactory="by.home.acs.language.psi.ACSElementType.createTypes"
   elementTypeHolderClass="by.home.acs.language.ACSTypes"
   elementTypeClass="by.home.acs.language.psi.ACSElementType"
   tokenTypeClass="by.home.acs.language.psi.ACSTokenType"
 
-  psiImplUtilClass="by.home.acs.language.util.psi.ACSBnfPsiImplUtil"
+  //psiImplUtilClass="by.home.acs.language.util.psi.ACSBnfPsiImplUtil"
   generate=[tokens="yes"]
 
   tokens = [

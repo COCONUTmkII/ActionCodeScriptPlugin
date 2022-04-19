@@ -25,6 +25,6 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="ACS Script file" implementationClass="by.home.acs.language.ACSFileType"
-                  fieldName="INSTANCE" language="ActionCodeScript" extensions="acs"/>
+                  language="ActionCodeScript" extensions="acs"/>
     </extensions>
 </idea-plugin>

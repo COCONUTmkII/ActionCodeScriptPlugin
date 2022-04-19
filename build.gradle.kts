@@ -59,7 +59,7 @@ tasks {
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
-        //dependsOn(generateACSLexer, generaceACSParser)
+        dependsOn(generateACSLexer, generateACSParser)
     }
 
     patchPluginXml {
