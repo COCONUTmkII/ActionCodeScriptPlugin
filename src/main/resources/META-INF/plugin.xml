@@ -28,5 +28,7 @@
                   language="ActionCodeScript" extensions="acs"/>
         <lang.parserDefinition language="ActionCodeScript"
                                implementationClass="by.home.acs.language.ACSParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="ActionCodeScript"
+                                       implementationClass="by.home.acs.language.highlight.ACSSyntaxHighlightFactory"/>
     </extensions>
 </idea-plugin>
