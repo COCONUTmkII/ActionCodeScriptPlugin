@@ -1,5 +1,6 @@
-package by.home.acs.language;
+package by.home.acs.language.lexer;
 
+import by.home.acs.language.ACSTypes;
 import by.home.acs.language.psi.ACSTokenType;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.TokenType;
@@ -69,68 +70,68 @@ NET="NET"
 %states WAITING_VALUE, TEST_ONE_VALUE
 %xstate TEST_VALUE
 %%
-  "#include"                                                {yybegin(YYINITIAL); return ACSScriptTypes.INCLUDE_KEY;}
-  "#import"                                                 {yybegin(YYINITIAL); return ACSScriptTypes.IMPORT_KEY;}
-  "#define"                                                 {yybegin(YYINITIAL); return ACSScriptTypes.DEFINE_KEY;}
-  "#library"                                                {yybegin(YYINITIAL); return ACSScriptTypes.LIBRARY_KEY;}
-  "global"                                                  {yybegin(YYINITIAL); return ACSScriptTypes.GLOBAL;}
-  "static"                                                  {yybegin(YYINITIAL); return ACSScriptTypes.STATIC;}
-  "world"                                                   {yybegin(YYINITIAL); return ACSScriptTypes.WORLD;}
-  "special"                                                 {yybegin(YYINITIAL); return ACSScriptTypes.SPECIAL;}
-  {OPEN_BRACKET}                                            {yybegin(YYINITIAL); return ACSScriptTypes.OPEN_BRACKET;}
-  {CLOSE_BRACKET}                                           {yybegin(YYINITIAL); return ACSScriptTypes.CLOSE_BRACKET;}
-  {OPEN_BRACE}                                              {yybegin(YYINITIAL); return ACSScriptTypes.OPEN_BRACE;}
-  {CLOSE_BRACE}                                             {yybegin(YYINITIAL); return ACSScriptTypes.CLOSE_BRACE;}
-  {VOID}                                                    {yybegin(YYINITIAL); return ACSScriptTypes.VOID;}
-  {BOOL}                                                    {yybegin(YYINITIAL); return ACSScriptTypes.BOOL;}
-  {INT}                                                     {yybegin(YYINITIAL); return ACSScriptTypes.INT;}
-  {STR}                                                     {yybegin(YYINITIAL); return ACSScriptTypes.STR;}
-  {FUNCTION}                                                {yybegin(YYINITIAL); return ACSScriptTypes.FUNCTION;}
-  {SCRIPT}                                                  {yybegin(YYINITIAL); return ACSScriptTypes.SCRIPT;}
+  "#include"                                                {yybegin(YYINITIAL); return ACSTypes.INCLUDE_KEY;}
+  "#import"                                                 {yybegin(YYINITIAL); return ACSTypes.IMPORT_KEY;}
+  "#define"                                                 {yybegin(YYINITIAL); return ACSTypes.DEFINE_KEY;}
+  "#library"                                                {yybegin(YYINITIAL); return ACSTypes.LIBRARY_KEY;}
+  "global"                                                  {yybegin(YYINITIAL); return ACSTypes.GLOBAL;}
+  "static"                                                  {yybegin(YYINITIAL); return ACSTypes.STATIC;}
+  "world"                                                   {yybegin(YYINITIAL); return ACSTypes.WORLD;}
+  "special"                                                 {yybegin(YYINITIAL); return ACSTypes.SPECIAL;}
+  {OPEN_BRACKET}                                            {yybegin(YYINITIAL); return ACSTypes.OPEN_BRACKET;}
+  {CLOSE_BRACKET}                                           {yybegin(YYINITIAL); return ACSTypes.CLOSE_BRACKET;}
+  {OPEN_BRACE}                                              {yybegin(YYINITIAL); return ACSTypes.OPEN_BRACE;}
+  {CLOSE_BRACE}                                             {yybegin(YYINITIAL); return ACSTypes.CLOSE_BRACE;}
+  {VOID}                                                    {yybegin(YYINITIAL); return ACSTypes.VOID;}
+  {BOOL}                                                    {yybegin(YYINITIAL); return ACSTypes.BOOL;}
+  {INT}                                                     {yybegin(YYINITIAL); return ACSTypes.INT;}
+  {STR}                                                     {yybegin(YYINITIAL); return ACSTypes.STR;}
+  {FUNCTION}                                                {yybegin(YYINITIAL); return ACSTypes.FUNCTION;}
+  {SCRIPT}                                                  {yybegin(YYINITIAL); return ACSTypes.SCRIPT;}
   ({CRLF}|{WHITE_SPACE})+                                   {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
-  "switch"                                                  {yybegin(YYINITIAL); return ACSScriptTypes.SWITCH;}
-  "case"                                                    {yybegin(YYINITIAL); return ACSScriptTypes.CASE;}
-  "for"                                                     {yybegin(YYINITIAL); return ACSScriptTypes.FOR;}
-  "while"                                                   {yybegin(YYINITIAL); return ACSScriptTypes.WHILE;}
-  "until"                                                   {yybegin(YYINITIAL); return ACSScriptTypes.UNTIL;}
-  "do"                                                      {yybegin(YYINITIAL); return ACSScriptTypes.DO;}
-  "break"                                                   {yybegin(YYINITIAL); return ACSScriptTypes.BREAK;}
-  "default"                                                 {yybegin(YYINITIAL); return ACSScriptTypes.DEFAULT;}
-  "if"                                                      {yybegin(YYINITIAL); return ACSScriptTypes.IF;}
-  "else"                                                    {yybegin(YYINITIAL); return ACSScriptTypes.ELSE;}
-  "return"                                                  {yybegin(YYINITIAL); return ACSScriptTypes.RETURN;}
-  "terminate"                                               {yybegin(YYINITIAL); return ACSScriptTypes.TERMINATE;}
-  "suspend"                                                 {yybegin(YYINITIAL); return ACSScriptTypes.SUSPEND;}
-  {NUMBER}                                                  {yybegin(YYINITIAL); return ACSScriptTypes.NUMBER;}
-  {STRING}                                                  {yybegin(YYINITIAL); return ACSScriptTypes.STRING;}
-  {END_LINE_COMMENT}                                        {yybegin(YYINITIAL); return ACSScriptTypes.COMMENT;}
-  {MULTIPLE_LINE_COMMENT}                                   {yybegin(YYINITIAL); return ACSScriptTypes.COMMENT;}
-  {CHARACTER}                                               {yybegin(YYINITIAL); return ACSScriptTypes.CHARACTER;}
-  {FLOAT}                                                   {yybegin(YYINITIAL); return ACSScriptTypes.FLOAT;}
-  {EQUALS_SYMBOL}                                           {yybegin(YYINITIAL); return ACSScriptTypes.EQUALS;}
-  {DOT_SYMBOL}                                              {yybegin(YYINITIAL); return ACSScriptTypes.DOT;}
-  {COMMA_SYMBOL}                                            {yybegin(YYINITIAL); return ACSScriptTypes.COMMA;}
-  {OPEN}                                                    {yybegin(YYINITIAL); return ACSScriptTypes.OPEN;}
-  {ENTER}                                                   {yybegin(YYINITIAL); return ACSScriptTypes.ENTER;}
-  {RETURN}                                                  {yybegin(YYINITIAL); return ACSScriptTypes.RETURN;}
-  {RESPAWN}                                                 {yybegin(YYINITIAL); return ACSScriptTypes.RESPAWN;}
-  {DEATH}                                                   {yybegin(YYINITIAL); return ACSScriptTypes.DEATH;}
-  {LIGHTNING}                                               {yybegin(YYINITIAL); return ACSScriptTypes.LIGHTNING;}
-  {UNLOADING}                                               {yybegin(YYINITIAL); return ACSScriptTypes.UNLOADING;}
-  {DISCONNECT}                                              {yybegin(YYINITIAL); return ACSScriptTypes.DISCONNECT;}
-  {KILL}                                                    {yybegin(YYINITIAL); return ACSScriptTypes.KILL;}
-  {REOPEN}                                                  {yybegin(YYINITIAL); return ACSScriptTypes.REOPEN;}
-  {PICKUP}                                                  {yybegin(YYINITIAL); return ACSScriptTypes.PICKUP;}
-  {REDRETURN}                                               {yybegin(YYINITIAL); return ACSScriptTypes.REDRETURN;}
-  {WHITERETURN}                                             {yybegin(YYINITIAL); return ACSScriptTypes.WHITERETURN;}
-  {BLUERETURN}                                              {yybegin(YYINITIAL); return ACSScriptTypes.BLUERETURN;}
-  {CLIENTSIDE}                                              {yybegin(YYINITIAL); return ACSScriptTypes.CLIENTSIDE;}
-  {NET}                                                     {yybegin(YYINITIAL); return ACSScriptTypes.NET;}
-  {OPEN_SQUARE_BRACKET}                                     {yybegin(YYINITIAL); return ACSScriptTypes.OPEN_SQUARE_BRACKET;}
-  {CLOSE_SQUARE_BRACKET}                                    {yybegin(YYINITIAL); return ACSScriptTypes.CLOSE_SQUARE_BRACKET;}
-  {SEMICOLON_SYMBOL}                                        {yybegin(YYINITIAL); return ACSScriptTypes.SEMICOLON;}
-  {COLON_SYMBOL}                                            {yybegin(YYINITIAL); return ACSScriptTypes.COLON;}
-  {IDENTIFIER}                                              {yybegin(YYINITIAL); return ACSScriptTypes.IDENTIFIER; }
+  "switch"                                                  {yybegin(YYINITIAL); return ACSTypes.SWITCH;}
+  "case"                                                    {yybegin(YYINITIAL); return ACSTypes.CASE;}
+  "for"                                                     {yybegin(YYINITIAL); return ACSTypes.FOR;}
+  "while"                                                   {yybegin(YYINITIAL); return ACSTypes.WHILE;}
+  "until"                                                   {yybegin(YYINITIAL); return ACSTypes.UNTIL;}
+  "do"                                                      {yybegin(YYINITIAL); return ACSTypes.DO;}
+  "break"                                                   {yybegin(YYINITIAL); return ACSTypes.BREAK;}
+  "default"                                                 {yybegin(YYINITIAL); return ACSTypes.DEFAULT;}
+  "if"                                                      {yybegin(YYINITIAL); return ACSTypes.IF;}
+  "else"                                                    {yybegin(YYINITIAL); return ACSTypes.ELSE;}
+  "return"                                                  {yybegin(YYINITIAL); return ACSTypes.RETURN;}
+  "terminate"                                               {yybegin(YYINITIAL); return ACSTypes.TERMINATE;}
+  "suspend"                                                 {yybegin(YYINITIAL); return ACSTypes.SUSPEND;}
+  {NUMBER}                                                  {yybegin(YYINITIAL); return ACSTypes.NUMBER;}
+  {STRING}                                                  {yybegin(YYINITIAL); return ACSTypes.STRING;}
+  {END_LINE_COMMENT}                                        {yybegin(YYINITIAL); return ACSTypes.COMMENT;}
+  {MULTIPLE_LINE_COMMENT}                                   {yybegin(YYINITIAL); return ACSTypes.COMMENT;}
+  {CHARACTER}                                               {yybegin(YYINITIAL); return ACSTypes.CHARACTER;}
+  {FLOAT}                                                   {yybegin(YYINITIAL); return ACSTypes.FLOAT;}
+  {EQUALS_SYMBOL}                                           {yybegin(YYINITIAL); return ACSTypes.EQUALS;}
+  {DOT_SYMBOL}                                              {yybegin(YYINITIAL); return ACSTypes.DOT;}
+  {COMMA_SYMBOL}                                            {yybegin(YYINITIAL); return ACSTypes.COMMA;}
+  {OPEN}                                                    {yybegin(YYINITIAL); return ACSTypes.OPEN;}
+  {ENTER}                                                   {yybegin(YYINITIAL); return ACSTypes.ENTER;}
+  {RETURN}                                                  {yybegin(YYINITIAL); return ACSTypes.RETURN;}
+  {RESPAWN}                                                 {yybegin(YYINITIAL); return ACSTypes.RESPAWN;}
+  {DEATH}                                                   {yybegin(YYINITIAL); return ACSTypes.DEATH;}
+  {LIGHTNING}                                               {yybegin(YYINITIAL); return ACSTypes.LIGHTNING;}
+  {UNLOADING}                                               {yybegin(YYINITIAL); return ACSTypes.UNLOADING;}
+  {DISCONNECT}                                              {yybegin(YYINITIAL); return ACSTypes.DISCONNECT;}
+  {KILL}                                                    {yybegin(YYINITIAL); return ACSTypes.KILL;}
+  {REOPEN}                                                  {yybegin(YYINITIAL); return ACSTypes.REOPEN;}
+  {PICKUP}                                                  {yybegin(YYINITIAL); return ACSTypes.PICKUP;}
+  {REDRETURN}                                               {yybegin(YYINITIAL); return ACSTypes.REDRETURN;}
+  {WHITERETURN}                                             {yybegin(YYINITIAL); return ACSTypes.WHITERETURN;}
+  {BLUERETURN}                                              {yybegin(YYINITIAL); return ACSTypes.BLUERETURN;}
+  {CLIENTSIDE}                                              {yybegin(YYINITIAL); return ACSTypes.CLIENTSIDE;}
+  {NET}                                                     {yybegin(YYINITIAL); return ACSTypes.NET;}
+  {OPEN_SQUARE_BRACKET}                                     {yybegin(YYINITIAL); return ACSTypes.OPEN_SQUARE_BRACKET;}
+  {CLOSE_SQUARE_BRACKET}                                    {yybegin(YYINITIAL); return ACSTypes.CLOSE_SQUARE_BRACKET;}
+  {SEMICOLON_SYMBOL}                                        {yybegin(YYINITIAL); return ACSTypes.SEMICOLON;}
+  {COLON_SYMBOL}                                            {yybegin(YYINITIAL); return ACSTypes.COLON;}
+  {IDENTIFIER}                                              {yybegin(YYINITIAL); return ACSTypes.IDENTIFIER; }
 // If the character sequence does not match any of the above rules, we return BAD_CHARACTER which indicates that
 // there is an error in the character sequence. This is used to highlight errors.
 [^] { return TokenType.BAD_CHARACTER; }

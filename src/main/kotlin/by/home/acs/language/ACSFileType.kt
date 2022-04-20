@@ -4,7 +4,7 @@ import by.home.acs.language.icon.ACSIcons
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-class ACSFileType private constructor() : LanguageFileType(ACSLanguage) {
+object ACSFileType : LanguageFileType(ACSLanguage) {
 
     override fun getName(): String {
         return "ACS Script file"

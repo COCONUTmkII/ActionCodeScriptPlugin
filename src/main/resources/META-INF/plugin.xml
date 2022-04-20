@@ -26,5 +26,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="ACS Script file" implementationClass="by.home.acs.language.ACSFileType"
                   language="ActionCodeScript" extensions="acs"/>
+        <lang.parserDefinition language="ActionCodeScript"
+                               implementationClass="by.home.acs.language.ACSParserDefinition"/>
     </extensions>
 </idea-plugin>

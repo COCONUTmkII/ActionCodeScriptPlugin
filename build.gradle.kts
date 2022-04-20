@@ -37,7 +37,7 @@ sourceSets["main"].java.srcDir("src/main/gen")
 val generateACSLexer = task<GenerateLexerTask>("GenerateLexer") {
     group = "grammar"
     source.set("src/main/grammar/ACS.flex")
-    targetDir.set("by.home.acs.language")
+    targetDir.set("src/main/gen/by/home/acs/language/lexer")
     targetClass.set("ACSLexer")
     purgeOldFiles.set(true)
 }

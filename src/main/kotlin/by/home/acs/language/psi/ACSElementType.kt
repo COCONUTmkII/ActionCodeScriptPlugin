@@ -8,17 +8,7 @@ class ACSElementType(debugName: String?) : IElementType(debugName.toString(), AC
     companion object {
 
         @JvmStatic fun createTypes(type: String): IElementType {
-            return when (type) {
-                "FUNCTION_NAME" -> {
-                    TODO("ACSFileElementType.FUNCTION_STUB")
-                }
-                "VARIABLE_NAME" -> {
-                    TODO("ACSFileElementType.VARIABLE_STUB")
-                }
-                else -> {
-                    ACSElementType(type)
-                }
-            }
+            return ACSElementType(type)
         }
     }
 
