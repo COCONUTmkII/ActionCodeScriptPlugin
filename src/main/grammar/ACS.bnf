@@ -19,18 +19,45 @@
   generate=[tokens="yes"]
 
   tokens = [
-          FUNCTION='function'
-                  SCRIPT='script'
-                  WHITE_SPACE = 'regexp:\s+'
-                  NUMBER='regexp:(0[xX][0-9a-fA-F]+)|(-?[0-9]+)'
-                  STRING = 'regexp:\"([^\\\"]|\\.)*\"'
-                  VOID = 'void'
-                  INT = 'int'
-                  STR = 'str'
-                  BOOl = 'bool'
-                  COMMA = ','
-                  IDENTIFIER = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
-      ]
+    //REGEXP TOKENS                    
+    WHITE_SPACE = 'regexp:\s+'
+    NUMBER='regexp:(0[xX][0-9a-fA-F]+)|(-?[0-9]+)'
+    STRING = 'regexp:\"([^\\\"]|\\.)*\"'
+    IDENTIFIER = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'  
+    
+    //KEYWORDS          
+    FUNCTION='function'
+    SCRIPT='script'
+    SPECIAL = 'special'
+
+    //SCRIPT TYPES
+    OPEN = 'OPEN'
+    ENTER = 'ENTER'
+    RETURN = 'RETURN'
+    RESPAWN = 'RESPAWN'
+    DEATH = 'DEATH'
+    LIGHTNING = 'LIGHNTNING'
+    UNLOADING = 'UNLOADING'
+    DISCONNEC = 'DISCONNECT'
+    KILL = 'KILL'
+    REOPEN = 'REOPEN'
+    PICKUP = 'PICKUP'
+    REDRETURN = 'REDRETURN'
+    BLUERETURN = 'BLUERETURN'
+    WHITERETURN = 'WHITERETURN'
+
+    //VARIABLE TYPES
+    VOID = 'void'
+    INT = 'int'
+    STR = 'str'
+    BOOl = 'bool'
+
+    //SYMBOLS
+    COMMA = ','
+    SEMICOLON = ';'
+    COLON = ':'
+
+  ]
 }
 
 ACSScriptFile ::= FileContainer
@@ -44,14 +71,12 @@ Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | 
     Specials declaration
  */
 
-SpecialDefinition ::= SpecialIdentifier SpecialExpression Semicolon
+SpecialDefinition ::= SPECIAL SpecialExpression SEMICOLON
 
-SpecialIdentifier ::= special
-
-SpecialExpression ::= (NUMBER Colon FunctionInvocation) (CommaSymbol SpecialExpression)*
+SpecialExpression ::= (NUMBER COLON FunctionInvocation) (COMMA SpecialExpression)*
 
 
-FunctionDefinition ::= FunctionIdentifier FunctionReturnType FunctionName FunctionParameters FunctionBody
+FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
 
 ScriptDefinition ::= ScriptIdentifier ScriptName (ScriptPossibleParams | ScriptType) (NetType ClientsideType | NetType | ClientsideType)? ScriptBody
 /**
@@ -102,17 +127,15 @@ ScriptParameterWithVoid ::=  VoidType
 
 ScriptParameter ::= ScriptParameterList
 
-ScriptParameterList ::= ScriptFormalParameter (CommaSymbol ScriptFormalParameter)*
+ScriptParameterList ::= ScriptFormalParameter (COMMA ScriptFormalParameter)*
 
-ScriptFormalParameter ::= IntType VariableName
+ScriptFormalParameter ::= INT VariableName
 
 ScriptBody ::= CodeBlock | Statement
 
 /**
     Function statements
  */
-FunctionIdentifier ::= FUNCTION
-
 FunctionInvocation ::= FunctionName (NormalFunctionInvocation | TypeCastFunctionInvocation | MixedCastFunctionInvocation)
 
 NormalFunctionInvocation ::=  OpenBracket FunctionInvokeParameters* CloseBracket
@@ -121,9 +144,9 @@ TypeCastFunctionInvocation ::=  OpenBracket TypeCastFunctionInvokeParameters Clo
 
 MixedCastFunctionInvocation ::=  OpenBracket MixedCastFunctionInvokeParameters CloseBracket
 
-TypeCastFunctionInvokeParameters ::= TypeCast Colon BinaryExpression (CommaSymbol TypeCast Colon BinaryExpression)*
+TypeCastFunctionInvokeParameters ::= TypeCast COLON BinaryExpression (COMMA TypeCast COLON BinaryExpression)*
 
-MixedCastFunctionInvokeParameters ::= TypeCast Colon BinaryExpression (CommaSymbol TypeCast Colon BinaryExpression | Semicolon FunctionInvokeParameters)*
+MixedCastFunctionInvokeParameters ::= TypeCast COLON BinaryExpression (COMMA TypeCast COLON BinaryExpression | SEMICOLON FunctionInvokeParameters)*
 /**
     TypeCasts parameters. All type cast parameters are case-sensitive. E.g. parameter 'S' instead of 's' will not work
  */
@@ -150,9 +173,9 @@ TypeCastString ::= 's'
 
 TypeCastHex ::= 'h'
 
-FunctionInvokeParameters ::= BinaryExpression (CommaSymbol BinaryExpression)*
+FunctionInvokeParameters ::= BinaryExpression (COMMA BinaryExpression)*
 
-FunctionReturnType ::= VoidType | Type
+FunctionReturnType ::= VOID | Type
 
 FunctionParameterWithVoid ::= VoidType
 
@@ -169,7 +192,7 @@ FunctionParameters ::= OpenBracket FunctionParameter CloseBracket
 
 FunctionParameter ::=  (FunctionParameterWithVoid | FunctionParameterList)
 
-FunctionParameterList ::= FunctionFormalParameter (CommaSymbol FunctionFormalParameter)*
+FunctionParameterList ::= FunctionFormalParameter (COMMA FunctionFormalParameter)*
 
 FunctionFormalParameter ::= Type VariableName
 
@@ -179,7 +202,7 @@ FunctionBody ::= OpenBrace Statement* CloseBrace
 
  */
 
-GlobalModifier ::= (global | world) Type NUMBER Colon IDENTIFIER Semicolon
+GlobalModifier ::= (global | world) Type NUMBER COLON IDENTIFIER SEMICOLON
 
 StaticModifier ::= static
 
@@ -189,13 +212,13 @@ ClientsideType ::= CLIENTSIDE
 
 VoidType ::= VOID
 
-TerminateKeyword ::= terminate Semicolon
+TerminateKeyword ::= terminate SEMICOLON
 
-SuspendKeyword ::= suspend Semicolon
+SuspendKeyword ::= suspend SEMICOLON
 
-RestartKeyword ::= restart Semicolon
+RestartKeyword ::= restart SEMICOLON
 
-Statement ::= (StatementWithoutSub | IncrementOrDecrementExpression Semicolon | VariableDefinition | AssignmentStatement | FunctionInvocation Semicolon | IfThenElseStatement | IfThenStatement | Loops | SwitchLoop)
+Statement ::= (StatementWithoutSub | IncrementOrDecrementExpression SEMICOLON | VariableDefinition | AssignmentStatement | FunctionInvocation SEMICOLON | IfThenElseStatement | IfThenStatement | Loops | SwitchLoop)
 
 StatementWithoutSub ::= (CodeBlock | BreakStatement | ContinueStatement | ReturnOperator | SuspendKeyword | RestartKeyword | TerminateKeyword)
 
@@ -213,9 +236,9 @@ IncrementOrDecrementExpression ::= LiteralExpression '++' | LiteralExpression '-
 
 NegationExpression ::= '!' LiteralExpression
 
-AssignmentStatement ::= (ArrayReferenceExpression | VariableName) Equals (FunctionInvocation Semicolon| VariableInitialization)
+AssignmentStatement ::= (ArrayReferenceExpression | VariableName) Equals (FunctionInvocation SEMICOLON| VariableInitialization)
 
-VariableDefinition ::= StaticModifier? Type RepeatableVariable ArrayType* (Semicolon | (Equals VariableInitialization))
+VariableDefinition ::= StaticModifier? Type RepeatableVariable ArrayType* (SEMICOLON | (Equals VariableInitialization))
 
 VariableName ::=  IDENTIFIER
         /*{
@@ -225,13 +248,13 @@ VariableName ::=  IDENTIFIER
             stubClass="by.home.acs.language.stub.variable.ACSVariableStub"
         }*/
 
-RepeatableVariable ::= VariableName (CommaSymbol RepeatableVariable)*
+RepeatableVariable ::= VariableName (COMMA RepeatableVariable)*
 
-VariableInitialization ::= (AssignmentExpression | SimpleInitialization) Semicolon
+VariableInitialization ::= (AssignmentExpression | SimpleInitialization) SEMICOLON
 
 ParenthesisedExpression ::= OpenBracket AssignmentExpression CloseBracket
 
-SimpleInitialization ::= AllTypes (CommaSymbol RepeatableVariable Equals AllTypes)*
+SimpleInitialization ::= AllTypes (COMMA RepeatableVariable Equals AllTypes)*
 
 LiteralExpression ::= (AllTypes | VariableName)
 
@@ -257,15 +280,15 @@ ForLoop ::= for OpenBracket Initialization Condition Iteration CloseBracket Stat
 
 private Initialization ::= EmptyInitialization | TypeInitialization
 
-EmptyInitialization ::= Semicolon
+EmptyInitialization ::= SEMICOLON
 
-TypeInitialization ::= StaticModifier? Type VariableList  ArithmeticInitialization* Semicolon
+TypeInitialization ::= StaticModifier? Type VariableList  ArithmeticInitialization* SEMICOLON
 
-private VariableList ::= RepeatableVariable Equals (NUMBER | STRING | VariableName ) (CommaSymbol VariableList)?//check logical type
+private VariableList ::= RepeatableVariable Equals (NUMBER | STRING | VariableName ) (COMMA VariableList)?//check logical type
 
 private ArithmeticInitialization ::= ArithmeticOperator (NUMBER | STRING | VariableName)
 
-private Condition ::= (EmptyCondition | (NormalCondition Semicolon) | ArithmeticCondition)
+private Condition ::= (EmptyCondition | (NormalCondition SEMICOLON) | ArithmeticCondition)
 
 private LogicalCondition ::= ComparisonOperator
 
@@ -273,43 +296,37 @@ private ComparisonCondition ::= (VariableName | NUMBER | STRING) LogicalConditio
 
 NormalCondition ::= ComparisonCondition (LogicalCondition ComparisonCondition)?
 
-private ArithmeticCondition ::= NormalCondition Semicolon LogicalOperator
+private ArithmeticCondition ::= NormalCondition SEMICOLON LogicalOperator
 
-EmptyCondition ::= Semicolon
+EmptyCondition ::= SEMICOLON
 
 private Iteration ::=  NormalIteration | EmptyIteration
 
 EmptyIteration ::= //not sure with this...
 
-NormalIteration ::= VariableName (ArithmeticOperator | ArithmeticOperator VariableName | VariableName AssignmentOperator (NUMBER | STRING | VariableName)) (CommaSymbol NormalIteration)?
+NormalIteration ::= VariableName (ArithmeticOperator | ArithmeticOperator VariableName | VariableName AssignmentOperator (NUMBER | STRING | VariableName)) (COMMA NormalIteration)?
 
 whileLoop ::= while OpenBracket AssignmentExpression CloseBracket Statement
 
 untilLoop ::= until OpenBracket AssignmentExpression CloseBracket Statement
 
-doWhileLoop ::= do Statement while OpenBracket AssignmentExpression CloseBracket Semicolon
+doWhileLoop ::= do Statement while OpenBracket AssignmentExpression CloseBracket SEMICOLON
 
-doUntilLoop ::= do Statement until OpenBracket AssignmentExpression CloseBracket Semicolon
+doUntilLoop ::= do Statement until OpenBracket AssignmentExpression CloseBracket SEMICOLON
 
-Type ::= (IntType | StringType | BoolType)
+Type ::= (INT | STR | BOOL)
 
 private AllTypes ::= STRING | CHARACTER | NUMBER | FLOAT | EmptyString | ArrayInitializer
 
-BoolType ::= BOOL
-
-IntType ::= INT
-
-StringType ::= STR
-
 EmptyString ::= '""'
 
-ArrayType ::=  OpenSquareBracket NUM CloseSquareBracket
+ArrayType ::=  OpenSquareBracket NUMBER CloseSquareBracket
 
-ArrayInitializer ::= OpenBrace ArrayInitializers* CloseBrace (CommaSymbol ArrayInitializer)?
+ArrayInitializer ::= OpenBrace ArrayInitializers* CloseBrace (COMMA ArrayInitializer)?
 
-ArrayInitializers ::= ArrayInitializer | (NUMBER | STRING) (CommaSymbol ArrayInitializers)?
+ArrayInitializers ::= ArrayInitializer | (NUMBER | STRING) (COMMA ArrayInitializers)?
 
-ReturnOperator ::= return Semicolon | return BinaryExpression Semicolon | return VariableName Semicolon // Use something else but IDENTIFIER later
+ReturnOperator ::= return SEMICOLON | return BinaryExpression SEMICOLON | return VariableName SEMICOLON // Use something else but IDENTIFIER later
 
 /**
     Control Flow Statements
@@ -323,9 +340,9 @@ SwitchLoop ::= switch OpenBracket (FunctionInvocation | VariableName | NUMBER) C
 
 CaseOperator ::=   CaseIdentifier Statement*
 
-private DefaultOnly ::= default Colon Statement
+private DefaultOnly ::= default COLON Statement
 
-private CaseIdentifier ::= case (VariableName | NUMBER | STRING) Colon
+private CaseIdentifier ::= case (VariableName | NUMBER | STRING) COLON
 
 /*
     Key symbol's
@@ -333,8 +350,6 @@ private CaseIdentifier ::= case (VariableName | NUMBER | STRING) Colon
 Equals ::= '='
 
 Dot ::= '.' //not used
-
-CommaSymbol ::= COMMA
 
 OpenBrace ::= '{'
 
@@ -344,21 +359,15 @@ OpenBracket ::= '('
 
 CloseBracket ::= ')'
 
-Semicolon ::= ';'
-
-Colon ::= ':'
-
 OpenSquareBracket ::= '['
 
 CloseSquareBracket ::= ']'
-
-NUM ::= NUMBER
 
 /**
     Loop Statements
  */
 
-BreakStatement ::= break Semicolon
+BreakStatement ::= break SEMICOLON
 
-ContinueStatement ::= continue Semicolon
+ContinueStatement ::= continue SEMICOLON
 
