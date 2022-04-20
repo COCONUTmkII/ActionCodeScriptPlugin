@@ -30,5 +30,7 @@
                                implementationClass="by.home.acs.language.ACSParserDefinition"/>
         <lang.syntaxHighlighterFactory language="ActionCodeScript"
                                        implementationClass="by.home.acs.language.highlight.ACSSyntaxHighlightFactory"/>
+        <lang.formatter language="ActionCodeScript"
+                        implementationClass="by.home.acs.language.formatter.ACSFormattingModelBuilder"/>
     </extensions>
 </idea-plugin>
