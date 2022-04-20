@@ -70,18 +70,18 @@ NET="NET"
 %states WAITING_VALUE, TEST_ONE_VALUE
 %xstate TEST_VALUE
 %%
-  "#include"                                                {yybegin(YYINITIAL); return ACSTypes.INCLUDE_KEY;}
-  "#import"                                                 {yybegin(YYINITIAL); return ACSTypes.IMPORT_KEY;}
-  "#define"                                                 {yybegin(YYINITIAL); return ACSTypes.DEFINE_KEY;}
-  "#library"                                                {yybegin(YYINITIAL); return ACSTypes.LIBRARY_KEY;}
+  "#include"                                                {yybegin(YYINITIAL); return ACSTypes.INCLUDE;}
+  "#import"                                                 {yybegin(YYINITIAL); return ACSTypes.IMPORT;}
+  "#define"                                                 {yybegin(YYINITIAL); return ACSTypes.DEFINE;}
+  "#library"                                                {yybegin(YYINITIAL); return ACSTypes.LIBRARY;}
   "global"                                                  {yybegin(YYINITIAL); return ACSTypes.GLOBAL;}
   "static"                                                  {yybegin(YYINITIAL); return ACSTypes.STATIC;}
   "world"                                                   {yybegin(YYINITIAL); return ACSTypes.WORLD;}
   "special"                                                 {yybegin(YYINITIAL); return ACSTypes.SPECIAL;}
-  {OPEN_BRACKET}                                            {yybegin(YYINITIAL); return ACSTypes.OPEN_BRACKET;}
-  {CLOSE_BRACKET}                                           {yybegin(YYINITIAL); return ACSTypes.CLOSE_BRACKET;}
-  {OPEN_BRACE}                                              {yybegin(YYINITIAL); return ACSTypes.OPEN_BRACE;}
-  {CLOSE_BRACE}                                             {yybegin(YYINITIAL); return ACSTypes.CLOSE_BRACE;}
+  {OPEN_BRACKET}                                            {yybegin(YYINITIAL); return ACSTypes.LPAR;}
+  {CLOSE_BRACKET}                                           {yybegin(YYINITIAL); return ACSTypes.RPAR;}
+  {OPEN_BRACE}                                              {yybegin(YYINITIAL); return ACSTypes.LBRACE;}
+  {CLOSE_BRACE}                                             {yybegin(YYINITIAL); return ACSTypes.RBRACE;}
   {VOID}                                                    {yybegin(YYINITIAL); return ACSTypes.VOID;}
   {BOOL}                                                    {yybegin(YYINITIAL); return ACSTypes.BOOL;}
   {INT}                                                     {yybegin(YYINITIAL); return ACSTypes.INT;}
@@ -108,8 +108,7 @@ NET="NET"
   {MULTIPLE_LINE_COMMENT}                                   {yybegin(YYINITIAL); return ACSTypes.COMMENT;}
   {CHARACTER}                                               {yybegin(YYINITIAL); return ACSTypes.CHARACTER;}
   {FLOAT}                                                   {yybegin(YYINITIAL); return ACSTypes.FLOAT;}
-  {EQUALS_SYMBOL}                                           {yybegin(YYINITIAL); return ACSTypes.EQUALS;}
-  {DOT_SYMBOL}                                              {yybegin(YYINITIAL); return ACSTypes.DOT;}
+  {EQUALS_SYMBOL}                                           {yybegin(YYINITIAL); return ACSTypes.ASSIGN;}
   {COMMA_SYMBOL}                                            {yybegin(YYINITIAL); return ACSTypes.COMMA;}
   {OPEN}                                                    {yybegin(YYINITIAL); return ACSTypes.OPEN;}
   {ENTER}                                                   {yybegin(YYINITIAL); return ACSTypes.ENTER;}
@@ -127,10 +126,42 @@ NET="NET"
   {BLUERETURN}                                              {yybegin(YYINITIAL); return ACSTypes.BLUERETURN;}
   {CLIENTSIDE}                                              {yybegin(YYINITIAL); return ACSTypes.CLIENTSIDE;}
   {NET}                                                     {yybegin(YYINITIAL); return ACSTypes.NET;}
-  {OPEN_SQUARE_BRACKET}                                     {yybegin(YYINITIAL); return ACSTypes.OPEN_SQUARE_BRACKET;}
-  {CLOSE_SQUARE_BRACKET}                                    {yybegin(YYINITIAL); return ACSTypes.CLOSE_SQUARE_BRACKET;}
+  {OPEN_SQUARE_BRACKET}                                     {yybegin(YYINITIAL); return ACSTypes.LBRACKET;}
+  {CLOSE_SQUARE_BRACKET}                                    {yybegin(YYINITIAL); return ACSTypes.RBRACKET;}
   {SEMICOLON_SYMBOL}                                        {yybegin(YYINITIAL); return ACSTypes.SEMICOLON;}
   {COLON_SYMBOL}                                            {yybegin(YYINITIAL); return ACSTypes.COLON;}
+  "*="                                                      {yybegin(YYINITIAL); return ACSTypes.MUL_ASSIGN; }
+  "/="                                                      {yybegin(YYINITIAL); return ACSTypes.DIV_ASSIGN; }
+  "%="                                                      {yybegin(YYINITIAL); return ACSTypes.DIV_MOD_ASSIGN; }
+  "+="                                                      {yybegin(YYINITIAL); return ACSTypes.P_ASSIGN; }
+  "-="                                                      {yybegin(YYINITIAL); return ACSTypes.M_ASSIGN; }
+  "<<="                                                     {yybegin(YYINITIAL); return ACSTypes.LB_SHIFT_ASSIGN; }
+  ">>="                                                     {yybegin(YYINITIAL); return ACSTypes.RB_SHIFT_ASSIGN; }
+  "&="                                                      {yybegin(YYINITIAL); return ACSTypes.BIT_AND_ASSIGN; }
+  "^="                                                      {yybegin(YYINITIAL); return ACSTypes.BIT_XOR_ASSIGN; }
+  "|="                                                      {yybegin(YYINITIAL); return ACSTypes.BIT_OR_ASSIGN; }
+  ">="                                                      {yybegin(YYINITIAL); return ACSTypes.MEQ; }
+  "<="                                                      {yybegin(YYINITIAL); return ACSTypes.LEQ; }
+  ">"                                                       {yybegin(YYINITIAL); return ACSTypes.MT; }
+  "<"                                                       {yybegin(YYINITIAL); return ACSTypes.LT; }
+  "=="                                                      {yybegin(YYINITIAL); return ACSTypes.EQ; }
+  "!="                                                      {yybegin(YYINITIAL); return ACSTypes.NEQ; }
+  "++"                                                      {yybegin(YYINITIAL); return ACSTypes.INC; }
+  "--"                                                      {yybegin(YYINITIAL); return ACSTypes.DEC; }
+  "+"                                                       {yybegin(YYINITIAL); return ACSTypes.PLUS; }
+  "-"                                                       {yybegin(YYINITIAL); return ACSTypes.MINUS; }
+  "/"                                                       {yybegin(YYINITIAL); return ACSTypes.DIVIDE; }
+  "%"                                                       {yybegin(YYINITIAL); return ACSTypes.MODULOUS; }
+  "*"                                                       {yybegin(YYINITIAL); return ACSTypes.MUL; }
+  "&&"                                                      {yybegin(YYINITIAL); return ACSTypes.BIT_AND; }
+  "||"                                                      {yybegin(YYINITIAL); return ACSTypes.BIT_OR; }
+  "!"                                                       {yybegin(YYINITIAL); return ACSTypes.BIT_NOT; }
+  "<<"                                                      {yybegin(YYINITIAL); return ACSTypes.L_SHIFT; }
+  ">>"                                                      {yybegin(YYINITIAL); return ACSTypes.R_SHIFT; }
+  "&"                                                       {yybegin(YYINITIAL); return ACSTypes.UN_AND; }
+  "|"                                                       {yybegin(YYINITIAL); return ACSTypes.UN_OR; }
+  "^"                                                       {yybegin(YYINITIAL); return ACSTypes.UN_XOR; }
+  "~"                                                       {yybegin(YYINITIAL); return ACSTypes.UN_NOT; }
   {IDENTIFIER}                                              {yybegin(YYINITIAL); return ACSTypes.IDENTIFIER; }
 // If the character sequence does not match any of the above rules, we return BAD_CHARACTER which indicates that
 // there is an error in the character sequence. This is used to highlight errors.
