@@ -19,6 +19,8 @@
   generate=[tokens="yes"]
 
   tokens = [
+    EMPTY_STRING = '""' //MAYBE CHANGE TO SINGLE QUOTES
+
     //REGEXP TOKENS                    
     WHITE_SPACE = 'regexp:\s+'
     NUMBER='regexp:(0[xX][0-9a-fA-F]+)|(-?[0-9]+)'
@@ -38,13 +40,14 @@
     DEATH = 'DEATH'
     LIGHTNING = 'LIGHNTNING'
     UNLOADING = 'UNLOADING'
-    DISCONNEC = 'DISCONNECT'
+    DISCONNECT = 'DISCONNECT'
     KILL = 'KILL'
     REOPEN = 'REOPEN'
     PICKUP = 'PICKUP'
     REDRETURN = 'REDRETURN'
     BLUERETURN = 'BLUERETURN'
     WHITERETURN = 'WHITERETURN'
+    NET = 'NET'
 
     //VARIABLE TYPES
     VOID = 'void'
@@ -52,11 +55,108 @@
     STR = 'str'
     BOOl = 'bool'
 
+    //DIRECTIVES
+    DEFINE = '#define'
+    IMPORT = '#import'
+    INCLUDE = '#include'
+    LIBRARY = '#library'
+
     //SYMBOLS
     COMMA = ','
     SEMICOLON = ';'
     COLON = ':'
+    
+    //TYPE-CASTS
+    TYPE_CAST_ARR = 'a'
+    TYPE_CAST_BINARY = 'b'
+    TYPE_CAST_CHAR = 'c'
+    TYPE_CAST_INT = 'i'
+    TYPE_CAST_DEC = 'd'
+    TYPE_CAST_FIXED_POINT_NUMBER = 'f'
+    TYPE_CAST_KEY = 'k'
+    TYPE_CAST_LANGUAGE = 'l'
+    TYPE_CAST_NAME = 'n'
+    TYPE_CAST_STRING = 's'
+    TYPE_CAST_HEX = 'h'
 
+    //CONTROL FLOW + LOOPS
+    DO = 'do'
+    WHILE = 'while'
+    FOR = 'for'
+    UNTIL = 'until'
+    IF = 'if'
+    ELSE = 'else'
+    SWITCH = 'switch'
+    CASE = 'case'
+    DEFAULT = 'default'
+    BREAK = 'break'
+    CONTINUE = 'continue'
+    
+    //SCRIPT STATEMENTS
+    TERMINATE = 'terminate'
+    SUSPEND = 'suspend'
+    RESTART = 'restart'
+    
+    //MODIFIERS
+    STATIC = 'static'
+    GLOBAL = 'global'
+    WORLD = 'world'
+    
+    //SYMBOLS
+    ASSIGN = '='
+    LBRACE = '{'
+    RBRACE = '}'
+    LPAR = '('
+    RPAR = ')'
+    LBRACKET = '['
+    RBRACKET = ']'
+
+    //OPERATORS:
+    //ASSIGNMENT OPERATORS
+    MUL_ASSIGN = '*='
+    DIV_ASSIGN = '/='
+    DIV_MOD_ASSIGN = '%='
+    P_ASSIGN = '+='
+    M_ASSIGN ='-='
+    LB_SHIFT_ASSIGN = '<<='
+    RB_SHIFT_ASSIGN = '>>='
+    BIT_AND_ASSIGN = '&='
+    BIT_XOR_ASSIGN = '^='
+    BIT_OR_ASSIGN = '|='
+
+    //COMPARISON OPERATORS
+    MEQ = '>='
+    LEQ = '<='
+    MT = '>'
+    LT = '<'
+
+    //EQUALITY OPERATORS
+    EQ = '=='
+    NEQ = '!='
+
+    //ARITHMETIC OPERATORS
+    INC = '++'
+    DEC = '--'
+    PLUS = '+'
+    MINUS = '-'
+    DIVIDE = '/'
+    MODULOUS = '%'
+    MUL = '*'
+
+    //LOGICAL OPERATORS
+    BIT_AND = '&&'
+    BIT_OR = '||'
+    BIT_NOT = '!'
+
+    //BITWISE OPERATORS
+    L_SHIFT = '<<'
+    R_SHIFT = '>>'
+
+    //UNARY OPERATORS
+    UN_AND = '&'
+    UN_OR = '|'
+    UN_XOR = '^'
+    UN_NOT ='~'
   ]
 }
 
@@ -64,8 +164,7 @@ ACSScriptFile ::= FileContainer
 
 private FileContainer ::= (COMMENT|Definition*)
 
-Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | GlobalModifier | SpecialDefinition | VariableDefinition)
-
+Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | GlobalVarStatement | SpecialDefinition | VariableDefinition)
 
 /**
     Specials declaration
@@ -75,38 +174,27 @@ SpecialDefinition ::= SPECIAL SpecialExpression SEMICOLON
 
 SpecialExpression ::= (NUMBER COLON FunctionInvocation) (COMMA SpecialExpression)*
 
-
 FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
 
-ScriptDefinition ::= ScriptIdentifier ScriptName (ScriptPossibleParams | ScriptType) (NetType ClientsideType | NetType | ClientsideType)? ScriptBody
+ScriptDefinition ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
+
 /**
     Directives statement
  */
+
 DirectivesDeclaration ::= (IncludeDeclaration | ImportDeclaration | DefineDeclaration | LibraryDeclaration)
 
-IncludeDeclaration ::= IncludeKey STRING
+IncludeDeclaration ::= INCLUDE STRING
 
-ImportDeclaration ::= ImportKey STRING
+ImportDeclaration ::= IMPORT STRING
 
-DefineDeclaration ::= DefineKey IDENTIFIER  DefineExpression
+DefineDeclaration ::= DEFINE IDENTIFIER  DefineExpression
 
-LibraryDeclaration ::= LibraryKey STRING
-
-/**
-    Directives keywords
- */
-
-DefineKey ::= '#define'
-
-IncludeKey ::= '#include'
-
-ImportKey ::= '#import'
-
-LibraryKey ::= '#library'
+LibraryDeclaration ::= LIBRARY STRING
 
 DefineExpression ::= DefineParenthesesExpression | DefineBinaryExpression | DefineLiteralExpression
 
-DefineParenthesesExpression ::= OpenBracket DefineExpression CloseBracket
+DefineParenthesesExpression ::= LPAR DefineExpression RPAR
 
 DefineBinaryExpression ::= DefineExpression Operator DefineExpression
 
@@ -115,15 +203,12 @@ DefineLiteralExpression ::= NUMBER | FLOAT | STRING | IDENTIFIER //VARIABLE NAME
 /**
     Script statements
  */
-ScriptIdentifier ::= SCRIPT
 
 ScriptType ::= OPEN | ENTER | RETURN | RESPAWN | DEATH | LIGHTNING | UNLOADING | DISCONNECT | KILL | REOPEN | PICKUP | REDRETURN | BLUERETURN | WHITERETURN
 
 ScriptName ::= (STRING | NUMBER)
 
-ScriptPossibleParams ::= OpenBracket (ScriptParameterWithVoid | ScriptParameter) CloseBracket
-
-ScriptParameterWithVoid ::=  VoidType
+ScriptPossibleParams ::= LPAR (VOID | ScriptParameter) RPAR
 
 ScriptParameter ::= ScriptParameterList
 
@@ -138,11 +223,11 @@ ScriptBody ::= CodeBlock | Statement
  */
 FunctionInvocation ::= FunctionName (NormalFunctionInvocation | TypeCastFunctionInvocation | MixedCastFunctionInvocation)
 
-NormalFunctionInvocation ::=  OpenBracket FunctionInvokeParameters* CloseBracket
+NormalFunctionInvocation ::=  LPAR FunctionInvokeParameters* RPAR
 
-TypeCastFunctionInvocation ::=  OpenBracket TypeCastFunctionInvokeParameters CloseBracket
+TypeCastFunctionInvocation ::=  LPAR TypeCastFunctionInvokeParameters RPAR
 
-MixedCastFunctionInvocation ::=  OpenBracket MixedCastFunctionInvokeParameters CloseBracket
+MixedCastFunctionInvocation ::=  LPAR MixedCastFunctionInvokeParameters RPAR
 
 TypeCastFunctionInvokeParameters ::= TypeCast COLON BinaryExpression (COMMA TypeCast COLON BinaryExpression)*
 
@@ -150,34 +235,12 @@ MixedCastFunctionInvokeParameters ::= TypeCast COLON BinaryExpression (COMMA Typ
 /**
     TypeCasts parameters. All type cast parameters are case-sensitive. E.g. parameter 'S' instead of 's' will not work
  */
-TypeCast ::= TypeCastArray | TypeCastBinary | TypeCastCharacter | TypeCastDecimal
-                | TypeCastFixedPointNumber | TypeCastKey | TypeCastLanguage | TypeCastName | TypeCastString | TypeCastHex
-
-TypeCastArray ::= 'a'
-
-TypeCastBinary ::= 'b'
-
-TypeCastCharacter ::= 'c'
-
-TypeCastDecimal ::= 'i' | 'd'
-
-TypeCastFixedPointNumber ::= 'f'
-
-TypeCastKey ::= 'k'
-
-TypeCastLanguage ::= 'l'
-
-TypeCastName ::= 'n'
-
-TypeCastString ::= 's'
-
-TypeCastHex ::= 'h'
+TypeCast ::= TYPE_CAST_ARR | TYPE_CAST_BINARY | TYPE_CAST_CHAR | TYPE_CAST_INT | TYPE_CAST_DEC
+                | TYPE_CAST_FIXED_POINT_NUMBER | TYPE_CAST_KEY | TYPE_CAST_LANGUAGE | TYPE_CAST_NAME | TYPE_CAST_STRING | TYPE_CAST_HEX
 
 FunctionInvokeParameters ::= BinaryExpression (COMMA BinaryExpression)*
 
 FunctionReturnType ::= VOID | Type
-
-FunctionParameterWithVoid ::= VoidType
 
 FunctionName ::= IDENTIFIER
 /*{
@@ -187,42 +250,35 @@ FunctionName ::= IDENTIFIER
     stubClass="by.home.acs.language.stub.function.ACSFunctionStub"
 }*/
 
+FunctionParameters ::= LPAR FunctionParameter RPAR
 
-FunctionParameters ::= OpenBracket FunctionParameter CloseBracket
-
-FunctionParameter ::=  (FunctionParameterWithVoid | FunctionParameterList)
+FunctionParameter ::=  (VOID | FunctionParameterList)
 
 FunctionParameterList ::= FunctionFormalParameter (COMMA FunctionFormalParameter)*
 
 FunctionFormalParameter ::= Type VariableName
 
-FunctionBody ::= OpenBrace Statement* CloseBrace
+FunctionBody ::= LBRACE Statement* RBRACE
 
 /**
 
  */
 
-GlobalModifier ::= (global | world) Type NUMBER COLON IDENTIFIER SEMICOLON
-
-StaticModifier ::= static
-
-NetType ::= NET
+GlobalVarStatement ::= (GLOBAL | WORLD) Type NUMBER COLON IDENTIFIER SEMICOLON
 
 ClientsideType ::= CLIENTSIDE
 
-VoidType ::= VOID
+TerminateStatement ::= TERMINATE SEMICOLON
 
-TerminateKeyword ::= terminate SEMICOLON
+SuspendStatement ::= SUSPEND SEMICOLON
 
-SuspendKeyword ::= suspend SEMICOLON
-
-RestartKeyword ::= restart SEMICOLON
+RestartStatement ::= RESTART SEMICOLON
 
 Statement ::= (StatementWithoutSub | IncrementOrDecrementExpression SEMICOLON | VariableDefinition | AssignmentStatement | FunctionInvocation SEMICOLON | IfThenElseStatement | IfThenStatement | Loops | SwitchLoop)
 
-StatementWithoutSub ::= (CodeBlock | BreakStatement | ContinueStatement | ReturnOperator | SuspendKeyword | RestartKeyword | TerminateKeyword)
+StatementWithoutSub ::= (CodeBlock | BreakStatement | ContinueStatement | ReturnOperator | SuspendStatement | RestartStatement | TerminateStatement)
 
-CodeBlock ::= OpenBrace Statement* CloseBrace
+CodeBlock ::= LBRACE Statement* RBRACE
 
 BinaryExpression ::= AssignmentExpression Operator AssignmentExpression
 
@@ -230,15 +286,15 @@ AssignmentExpression ::= (ParenthesisedExpression | BinaryExpression | FunctionI
 
 ArrayReferenceExpression ::= VariableName ArrayReference+
 
-ArrayReference ::= OpenSquareBracket (BinaryExpression) CloseSquareBracket
+ArrayReference ::= LBRACKET (BinaryExpression) RBRACKET
 
 IncrementOrDecrementExpression ::= LiteralExpression '++' | LiteralExpression '--' | '++' LiteralExpression | '--' LiteralExpression
 
 NegationExpression ::= '!' LiteralExpression
 
-AssignmentStatement ::= (ArrayReferenceExpression | VariableName) Equals (FunctionInvocation SEMICOLON| VariableInitialization)
+AssignmentStatement ::= (ArrayReferenceExpression | VariableName) ASSIGN (FunctionInvocation SEMICOLON| VariableInitialization)
 
-VariableDefinition ::= StaticModifier? Type RepeatableVariable ArrayType* (SEMICOLON | (Equals VariableInitialization))
+VariableDefinition ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization))
 
 VariableName ::=  IDENTIFIER
         /*{
@@ -252,15 +308,15 @@ RepeatableVariable ::= VariableName (COMMA RepeatableVariable)*
 
 VariableInitialization ::= (AssignmentExpression | SimpleInitialization) SEMICOLON
 
-ParenthesisedExpression ::= OpenBracket AssignmentExpression CloseBracket
+ParenthesisedExpression ::= LPAR AssignmentExpression RPAR
 
-SimpleInitialization ::= AllTypes (COMMA RepeatableVariable Equals AllTypes)*
+SimpleInitialization ::= AllTypes (COMMA RepeatableVariable ASSIGN AllTypes)*
 
 LiteralExpression ::= (AllTypes | VariableName)
 
 Operator ::= (EqualityOperator | AssignmentOperator | LogicalOperator | UnaryOperator  | BitwiseOperator | ComparisonOperator | ArithmeticOperator )
 
-AssignmentOperator ::= ( '=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' )
+AssignmentOperator ::= ( '=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' ) //MIGHT BE ERROR HERE BECAUSE OF ASSIGN. NEED A LOT OF TESTS
 
 ComparisonOperator ::= ( '>=' | '<=' | '>' | '<' )
 
@@ -274,17 +330,17 @@ BitwiseOperator ::= ( '<<' | '>>' )
 
 UnaryOperator ::= ('&' | '|' | '^' | '~')
 
-Loops ::= ForLoop | whileLoop | untilLoop | doWhileLoop | doUntilLoop
+Loops ::= forLoop | whileLoop | untilLoop | doWhileLoop | doUntilLoop
 
-ForLoop ::= for OpenBracket Initialization Condition Iteration CloseBracket Statement
+forLoop ::= FOR LPAR Initialization Condition Iteration RPAR Statement
 
 private Initialization ::= EmptyInitialization | TypeInitialization
 
 EmptyInitialization ::= SEMICOLON
 
-TypeInitialization ::= StaticModifier? Type VariableList  ArithmeticInitialization* SEMICOLON
+TypeInitialization ::= STATIC? Type VariableList  ArithmeticInitialization* SEMICOLON
 
-private VariableList ::= RepeatableVariable Equals (NUMBER | STRING | VariableName ) (COMMA VariableList)?//check logical type
+private VariableList ::= RepeatableVariable ASSIGN (NUMBER | STRING | VariableName ) (COMMA VariableList)?//check logical type
 
 private ArithmeticInitialization ::= ArithmeticOperator (NUMBER | STRING | VariableName)
 
@@ -306,68 +362,47 @@ EmptyIteration ::= //not sure with this...
 
 NormalIteration ::= VariableName (ArithmeticOperator | ArithmeticOperator VariableName | VariableName AssignmentOperator (NUMBER | STRING | VariableName)) (COMMA NormalIteration)?
 
-whileLoop ::= while OpenBracket AssignmentExpression CloseBracket Statement
+whileLoop ::= WHILE LPAR AssignmentExpression RPAR Statement
 
-untilLoop ::= until OpenBracket AssignmentExpression CloseBracket Statement
+untilLoop ::= UNTIL LPAR AssignmentExpression RPAR Statement
 
-doWhileLoop ::= do Statement while OpenBracket AssignmentExpression CloseBracket SEMICOLON
+doWhileLoop ::= DO Statement WHILE LPAR AssignmentExpression RPAR SEMICOLON
 
-doUntilLoop ::= do Statement until OpenBracket AssignmentExpression CloseBracket SEMICOLON
+doUntilLoop ::= DO Statement UNTIL LPAR AssignmentExpression RPAR SEMICOLON
 
 Type ::= (INT | STR | BOOL)
 
-private AllTypes ::= STRING | CHARACTER | NUMBER | FLOAT | EmptyString | ArrayInitializer
+private AllTypes ::= STRING | CHARACTER | NUMBER | FLOAT | EMPTY_STRING | ArrayInitializer
 
-EmptyString ::= '""'
+ArrayType ::=  LBRACKET NUMBER RBRACKET
 
-ArrayType ::=  OpenSquareBracket NUMBER CloseSquareBracket
-
-ArrayInitializer ::= OpenBrace ArrayInitializers* CloseBrace (COMMA ArrayInitializer)?
+ArrayInitializer ::= LBRACE ArrayInitializers* RBRACE (COMMA ArrayInitializer)?
 
 ArrayInitializers ::= ArrayInitializer | (NUMBER | STRING) (COMMA ArrayInitializers)?
 
-ReturnOperator ::= return SEMICOLON | return BinaryExpression SEMICOLON | return VariableName SEMICOLON // Use something else but IDENTIFIER later
+ReturnOperator ::= RETURN SEMICOLON | RETURN BinaryExpression SEMICOLON | RETURN VariableName SEMICOLON // Use something ELSE but IDENTIFIER later
 
 /**
     Control Flow Statements
  */
 
-IfThenStatement ::= if OpenBracket AssignmentExpression CloseBracket (Statement | IfThenElseStatement)
+IfThenStatement ::= IF LPAR AssignmentExpression RPAR (Statement | IfThenElseStatement)
 
-IfThenElseStatement ::= if OpenBracket AssignmentExpression CloseBracket Statement else Statement
+IfThenElseStatement ::= IF LPAR AssignmentExpression RPAR Statement ELSE Statement
 
-SwitchLoop ::= switch OpenBracket (FunctionInvocation | VariableName | NUMBER) CloseBracket OpenBrace CaseOperator* DefaultOnly? CloseBrace
+SwitchLoop ::= SWITCH LPAR (FunctionInvocation | VariableName | NUMBER) RPAR LBRACE CaseOperator* DefaultOnly? RBRACE
 
 CaseOperator ::=   CaseIdentifier Statement*
 
-private DefaultOnly ::= default COLON Statement
+private DefaultOnly ::= DEFAULT COLON Statement
 
-private CaseIdentifier ::= case (VariableName | NUMBER | STRING) COLON
-
-/*
-    Key symbol's
- */
-Equals ::= '='
-
-Dot ::= '.' //not used
-
-OpenBrace ::= '{'
-
-CloseBrace ::= '}'
-
-OpenBracket ::= '('
-
-CloseBracket ::= ')'
-
-OpenSquareBracket ::= '['
-
-CloseSquareBracket ::= ']'
+private CaseIdentifier ::= CASE (VariableName | NUMBER | STRING) COLON
 
 /**
     Loop Statements
  */
 
-BreakStatement ::= break SEMICOLON
+BreakStatement ::= BREAK SEMICOLON
 
-ContinueStatement ::= continue SEMICOLON
+ContinueStatement ::= CONTINUE SEMICOLON
 

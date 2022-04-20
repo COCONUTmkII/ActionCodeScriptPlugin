@@ -16,10 +16,10 @@ import com.intellij.psi.tree.IElementType
 object ACSSyntaxHighlighter : SyntaxHighlighterBase() {
 
     private val elements = hashMapOf(
-        ACSTypes.INCLUDE_KEY to KEY,
-        ACSTypes.IMPORT_KEY to KEY,
-        ACSTypes.DEFINE_KEY to KEY,
-        ACSTypes.LIBRARY_KEY to KEY,
+        ACSTypes.INCLUDE to KEY,
+        ACSTypes.IMPORT to KEY,
+        ACSTypes.DEFINE to KEY,
+        ACSTypes.LIBRARY to KEY,
         ACSTypes.WORLD to KEY,
         ACSTypes.GLOBAL to KEY,
         ACSTypes.STATIC to KEY,
