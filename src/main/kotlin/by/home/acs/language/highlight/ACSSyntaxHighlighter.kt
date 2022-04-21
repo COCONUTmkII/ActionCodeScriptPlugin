@@ -62,7 +62,8 @@ object ACSSyntaxHighlighter : SyntaxHighlighterBase() {
         ACSTypes.EMPTY_STRING to STRING_VALUE,
         ACSTypes.STRING to STRING_VALUE,
 
-        ACSTypes.COMMENT to COMMENT,
+        ACSTypes.END_OF_LINE_COMMENT to COMMENT,
+        ACSTypes.C_STYLE_BLOCK_COMMENT to COMMENT,
 
         ACSTypes.IDENTIFIER to IDENTIFIER,
 

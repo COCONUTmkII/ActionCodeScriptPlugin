@@ -158,12 +158,16 @@
     UN_OR = '|'
     UN_XOR = '^'
     UN_NOT ='~'
+
+    //COMMENTS
+    END_OF_LINE_COMMENT = '//'
+    C_STYLE_BLOCK_COMMENT = 'regexp:/\*.*?\*/'
   ]
 }
 
 ACSScriptFile ::= FileContainer
 
-private FileContainer ::= (COMMENT|Definition*)
+private FileContainer ::= (END_OF_LINE_COMMENT | C_STYLE_BLOCK_COMMENT |Definition*)
 
 Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | GlobalVarStatement | SpecialDefinition | VariableDefinition)
 

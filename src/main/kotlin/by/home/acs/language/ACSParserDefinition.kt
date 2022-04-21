@@ -16,7 +16,7 @@ import com.intellij.psi.tree.TokenSet
 class ACSParserDefinition : ParserDefinition {
 
     private val whitespaces = TokenSet.create(TokenType.WHITE_SPACE)
-    private val comments = TokenSet.create(ACSTypes.COMMENT)
+    private val comments = TokenSet.create(ACSTypes.END_OF_LINE_COMMENT, ACSTypes.C_STYLE_BLOCK_COMMENT)
     private val file: IFileElementType = IFileElementType(ACSLanguage) //TODO change this to stubs
 
     override fun createLexer(project: Project?): Lexer {

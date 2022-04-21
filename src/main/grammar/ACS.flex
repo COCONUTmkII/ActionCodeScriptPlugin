@@ -104,8 +104,8 @@ NET="NET"
   "suspend"                                                 {yybegin(YYINITIAL); return ACSTypes.SUSPEND;}
   {NUMBER}                                                  {yybegin(YYINITIAL); return ACSTypes.NUMBER;}
   {STRING}                                                  {yybegin(YYINITIAL); return ACSTypes.STRING;}
-  {END_LINE_COMMENT}                                        {yybegin(YYINITIAL); return ACSTypes.COMMENT;}
-  {MULTIPLE_LINE_COMMENT}                                   {yybegin(YYINITIAL); return ACSTypes.COMMENT;}
+  {END_LINE_COMMENT}                                        {yybegin(YYINITIAL); return ACSTypes.END_OF_LINE_COMMENT;}
+  {MULTIPLE_LINE_COMMENT}                                   {yybegin(YYINITIAL); return ACSTypes.C_STYLE_BLOCK_COMMENT;}
   {CHARACTER}                                               {yybegin(YYINITIAL); return ACSTypes.CHARACTER;}
   {FLOAT}                                                   {yybegin(YYINITIAL); return ACSTypes.FLOAT;}
   {EQUALS_SYMBOL}                                           {yybegin(YYINITIAL); return ACSTypes.ASSIGN;}
