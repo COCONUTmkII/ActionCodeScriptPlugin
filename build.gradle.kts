@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("org.jetbrains.intellij") version "1.4.0"
     id("org.jetbrains.grammarkit") version "2021.2.2"
+    id("org.sonarqube") version "3.3"
 }
 
 group = "by.home"
@@ -18,6 +19,12 @@ apply {
     plugin("idea")
     plugin("org.jetbrains.grammarkit")
     plugin("org.jetbrains.intellij")
+}
+
+sonarqube.properties {
+    property("sonar.projectKey", "COCONUTmkII_ActionCodeScriptPlugin")
+    property("sonar.organization", "coconutmkii")
+    property("sonar.host.url", "https://sonarcloud.io")
 }
 
 repositories {
