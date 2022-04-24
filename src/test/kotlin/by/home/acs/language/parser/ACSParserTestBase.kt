@@ -8,4 +8,7 @@ abstract class ACSParserTestBase(path: String) :
     override fun getTestDataPath(): String = "src/test/resources"
 
     fun doTest() = doTest(true)
+
+    override fun includeRanges(): Boolean = true
+
 }
