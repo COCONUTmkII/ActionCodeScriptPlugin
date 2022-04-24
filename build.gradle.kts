@@ -70,6 +70,15 @@ tasks {
         dependsOn(generateACSLexer, generateACSParser)
     }
 
+    withType<JacocoReport> {
+        reports {
+            xml.required.set(true)
+            xml.outputLocation.set(file("$buildDir/reports/jacoco/test/jacocoTestReport.xml"))
+            csv.required.set(false)
+            html.required.set(false)
+        }
+    }
+
     withType(Test::class.java) {
         useJUnitPlatform()
     }
