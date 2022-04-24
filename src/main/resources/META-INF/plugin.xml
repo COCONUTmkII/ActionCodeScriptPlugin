@@ -27,7 +27,7 @@
         <fileType name="ACS Script file" implementationClass="by.home.acs.language.ACSFileType"
                   language="ActionCodeScript" extensions="acs"/>
         <lang.parserDefinition language="ActionCodeScript"
-                               implementationClass="by.home.acs.language.ACSParserDefinition"/>
+                               implementationClass="by.home.acs.language.parser.ACSParserDefinition"/>
         <lang.syntaxHighlighterFactory language="ActionCodeScript"
                                        implementationClass="by.home.acs.language.highlight.ACSSyntaxHighlightFactory"/>
         <lang.formatter language="ActionCodeScript"

@@ -1,6 +1,9 @@
-package by.home.acs.language
+package by.home.acs.language.parser
 
-import by.home.acs.language.parser.ACSParser
+import by.home.acs.language.ACSFile
+import by.home.acs.language.ACSLanguage
+import by.home.acs.language.ACSTypes
+import by.home.acs.language.lexer.ACSLexerAdapter
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser

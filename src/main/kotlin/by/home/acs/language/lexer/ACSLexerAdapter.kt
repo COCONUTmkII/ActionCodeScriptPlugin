@@ -1,6 +1,5 @@
-package by.home.acs.language
+package by.home.acs.language.lexer
 
 import com.intellij.lexer.FlexAdapter
-import by.home.acs.language.lexer.ACSLexer
 
 class ACSLexerAdapter : FlexAdapter(ACSLexer(null))

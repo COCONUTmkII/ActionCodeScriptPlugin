@@ -1,6 +1,5 @@
 package by.home.acs.language.highlight
 
-import by.home.acs.language.ACSLexerAdapter
 import by.home.acs.language.ACSTypes
 import by.home.acs.language.highlight.ACSTextAttributeKeyValue.COMMENT
 import by.home.acs.language.highlight.ACSTextAttributeKeyValue.IDENTIFIER
@@ -8,6 +7,7 @@ import by.home.acs.language.highlight.ACSTextAttributeKeyValue.INT_VALUE
 import by.home.acs.language.highlight.ACSTextAttributeKeyValue.KEY
 import by.home.acs.language.highlight.ACSTextAttributeKeyValue.SCRIPT_TYPE
 import by.home.acs.language.highlight.ACSTextAttributeKeyValue.STRING_VALUE
+import by.home.acs.language.lexer.ACSLexerAdapter
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase

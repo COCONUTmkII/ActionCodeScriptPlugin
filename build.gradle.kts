@@ -25,6 +25,7 @@ sonarqube.properties {
     property("sonar.projectKey", "COCONUTmkII_ActionCodeScriptPlugin")
     property("sonar.organization", "coconutmkii")
     property("sonar.host.url", "https://sonarcloud.io")
+    property("sonar.exclusions", "**/src/main/gen/**/*.java")
 }
 
 repositories {
@@ -67,6 +68,10 @@ tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
         dependsOn(generateACSLexer, generateACSParser)
+    }
+
+    withType(Test::class.java) {
+        useJUnitPlatform()
     }
 
     patchPluginXml {
