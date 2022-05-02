@@ -169,19 +169,19 @@ ACSScriptFile ::= FileContainer
 
 private FileContainer ::= (END_OF_LINE_COMMENT | C_STYLE_BLOCK_COMMENT |Definition*)
 
-Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | GlobalVarStatement | SpecialDefinition | VariableDefinition)
+Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | GlobalVarStatement | WorldVarStatement | SpecialDefinition | VariableDefinition)
 
 /**
     Specials declaration
  */
 
-SpecialDefinition ::= SPECIAL SpecialExpression SEMICOLON
+SpecialDefinition ::= SPECIAL SpecialExpression SEMICOLON {pin = 1}
 
 SpecialExpression ::= (NUMBER COLON FunctionInvocation) (COMMA SpecialExpression)*
 
-FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
+FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody {pin = 1}
 
-ScriptDefinition ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
+ScriptDefinition ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody {pin = 1}
 
 /**
     Directives statement
@@ -189,13 +189,13 @@ ScriptDefinition ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET 
 
 DirectivesDeclaration ::= (IncludeDeclaration | ImportDeclaration | DefineDeclaration | LibraryDeclaration)
 
-IncludeDeclaration ::= INCLUDE STRING
+IncludeDeclaration ::= INCLUDE STRING {pin = 1}
 
-ImportDeclaration ::= IMPORT STRING
+ImportDeclaration ::= IMPORT STRING {pin = 1}
 
-DefineDeclaration ::= DEFINE IDENTIFIER  DefineExpression
+DefineDeclaration ::= DEFINE IDENTIFIER  DefineExpression {pin = 1}
 
-LibraryDeclaration ::= LIBRARY STRING
+LibraryDeclaration ::= LIBRARY STRING {pin = 1}
 
 DefineExpression ::= DefineParenthesesExpression | DefineBinaryExpression | DefineLiteralExpression
 
@@ -226,7 +226,7 @@ ScriptBody ::= CodeBlock | Statement
 /**
     Function statements
  */
-FunctionInvocation ::= FunctionName (NormalFunctionInvocation | TypeCastFunctionInvocation | MixedCastFunctionInvocation)
+FunctionInvocation ::= FunctionName (NormalFunctionInvocation | TypeCastFunctionInvocation | MixedCastFunctionInvocation) {pin = 1}
 
 NormalFunctionInvocation ::=  LPAR FunctionInvokeParameters* RPAR
 
@@ -291,7 +291,9 @@ FunctionBody ::= LBRACE Statement* RBRACE
 
  */
 
-GlobalVarStatement ::= (GLOBAL | WORLD) Type NUMBER COLON IDENTIFIER SEMICOLON
+GlobalVarStatement ::= GLOBAL Type NUMBER COLON IDENTIFIER SEMICOLON {pin = 1}
+
+WorldVarStatement ::= WORLD Type NUMBER COLON IDENTIFIER SEMICOLON {pin = 1}
 
 ClientsideType ::= CLIENTSIDE
 
@@ -321,7 +323,7 @@ NegationExpression ::= '!' LiteralExpression
 
 AssignmentStatement ::= (ArrayReferenceExpression | VariableName) ASSIGN (FunctionInvocation SEMICOLON| VariableInitialization)
 
-VariableDefinition ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization))
+VariableDefinition ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization)) {pin = 3}
 
 VariableName ::=  IDENTIFIER
         /*{
@@ -359,13 +361,13 @@ UnaryOperator ::= ('&' | '|' | '^' | '~')
 
 Loops ::= forLoop | whileLoop | untilLoop | doWhileLoop | doUntilLoop
 
-forLoop ::= FOR LPAR Initialization Condition Iteration RPAR Statement
+forLoop ::= FOR LPAR Initialization Condition Iteration RPAR Statement {pin = 1}
 
 private Initialization ::= EmptyInitialization | TypeInitialization
 
 EmptyInitialization ::= SEMICOLON
 
-TypeInitialization ::= STATIC? Type VariableList  ArithmeticInitialization* SEMICOLON
+TypeInitialization ::= STATIC? Type VariableList  ArithmeticInitialization* SEMICOLON {pin = 3}
 
 private VariableList ::= RepeatableVariable ASSIGN (NUMBER | STRING | VariableName ) (COMMA VariableList)?//check logical type
 
@@ -389,13 +391,13 @@ EmptyIteration ::= //not sure with this...
 
 NormalIteration ::= VariableName (ArithmeticOperator | ArithmeticOperator VariableName | VariableName AssignmentOperator (NUMBER | STRING | VariableName)) (COMMA NormalIteration)?
 
-whileLoop ::= WHILE LPAR AssignmentExpression RPAR Statement
+whileLoop ::= WHILE LPAR AssignmentExpression RPAR Statement {pin = 1}
 
-untilLoop ::= UNTIL LPAR AssignmentExpression RPAR Statement
+untilLoop ::= UNTIL LPAR AssignmentExpression RPAR Statement {pin = 1}
 
-doWhileLoop ::= DO Statement WHILE LPAR AssignmentExpression RPAR SEMICOLON
+doWhileLoop ::= DO Statement WHILE LPAR AssignmentExpression RPAR SEMICOLON {pin = 1}
 
-doUntilLoop ::= DO Statement UNTIL LPAR AssignmentExpression RPAR SEMICOLON
+doUntilLoop ::= DO Statement UNTIL LPAR AssignmentExpression RPAR SEMICOLON {pin = 1}
 
 Type ::= (INT | STR | BOOL)
 
@@ -413,11 +415,11 @@ ReturnOperator ::= RETURN SEMICOLON | RETURN BinaryExpression SEMICOLON | RETURN
     Control Flow Statements
  */
 
-IfThenStatement ::= IF LPAR AssignmentExpression RPAR (Statement | IfThenElseStatement)
+IfThenStatement ::= IF LPAR AssignmentExpression RPAR (Statement | IfThenElseStatement) {pin = 1}
 
 IfThenElseStatement ::= IF LPAR AssignmentExpression RPAR Statement ELSE Statement
 
-SwitchLoop ::= SWITCH LPAR (FunctionInvocation | VariableName | NUMBER) RPAR LBRACE CaseOperator* DefaultOnly? RBRACE
+SwitchLoop ::= SWITCH LPAR (FunctionInvocation | VariableName | NUMBER) RPAR LBRACE CaseOperator* DefaultOnly? RBRACE {pin = 1}
 
 CaseOperator ::=   CaseIdentifier Statement*
 
