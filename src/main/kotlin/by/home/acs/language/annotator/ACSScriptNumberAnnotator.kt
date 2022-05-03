@@ -1,9 +1,7 @@
 package by.home.acs.language.annotator
 
 import by.home.acs.language.ACSTypes
-import by.home.acs.language.psi.ACSTokenType
 import by.home.acs.language.psi.ACScriptScriptName
-import by.home.acs.language.psi.ACScriptType
 import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.lang.ASTNode
 import com.intellij.lang.annotation.AnnotationHolder

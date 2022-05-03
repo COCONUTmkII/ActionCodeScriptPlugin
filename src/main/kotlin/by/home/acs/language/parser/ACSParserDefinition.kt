@@ -4,6 +4,7 @@ import by.home.acs.language.ACSFile
 import by.home.acs.language.ACSLanguage
 import by.home.acs.language.ACSTypes
 import by.home.acs.language.lexer.ACSLexerAdapter
+import by.home.acs.language.stub.type.file.ACSStubFileElementType
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
@@ -20,7 +21,7 @@ class ACSParserDefinition : ParserDefinition {
 
     private val whitespaces = TokenSet.create(TokenType.WHITE_SPACE)
     private val comments = TokenSet.create(ACSTypes.END_OF_LINE_COMMENT, ACSTypes.C_STYLE_BLOCK_COMMENT)
-    private val file: IFileElementType = IFileElementType(ACSLanguage) //TODO change this to stubs
+    private val file = ACSStubFileElementType(ACSLanguage)
 
     override fun createLexer(project: Project?): Lexer {
         return ACSLexerAdapter()
