@@ -180,6 +180,12 @@ SpecialDefinition ::= SPECIAL SpecialExpression SEMICOLON
 SpecialExpression ::= (NUMBER COLON FunctionInvocation) (COMMA SpecialExpression)*
 
 FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
+{
+    pin = 1
+    implements="by.home.acs.language.psi.ACSElement"
+    mixin="by.home.acs.language.psi.impl.ACSPsiFunctionImpl"
+    stubClass="by.home.acs.language.stub.type.function.ACSFunctionStub"
+}
 
 ScriptDefinition ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
 
