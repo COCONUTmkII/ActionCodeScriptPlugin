@@ -5,12 +5,12 @@ import by.home.acs.language.psi.ACSNamedElement
 import com.intellij.extapi.psi.StubBasedPsiElementBase
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.ILightStubElementType
+import com.intellij.psi.stubs.IStubElementType
 import com.intellij.psi.stubs.StubElement
 import javax.swing.Icon
 
 abstract class ACSNamedStubBasedPsiElementBase<T : StubElement<*>> : StubBasedPsiElementBase<T>, ACSNamedElement {
-    constructor(stub: T, nodeType: ILightStubElementType<*, *>) : super(stub, nodeType)
+    constructor(stub: T, nodeType: IStubElementType<*, *>) : super(stub, nodeType)
 
     constructor(node: ASTNode) : super(node)
 

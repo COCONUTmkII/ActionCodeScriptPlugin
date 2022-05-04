@@ -1,54 +1,32 @@
 package by.home.acs.language.psi.impl
 
 
+
+import by.home.acs.language.psi.ACSFunctionDefinition
+import by.home.acs.language.psi.ACSFunctionParameters
+import by.home.acs.language.psi.ACSFunctionReturnType
 import by.home.acs.language.psi.ACSPsiFunction
-import by.home.acs.language.psi.ACScriptFunctionParameterList
-import by.home.acs.language.psi.ACScriptType
 import by.home.acs.language.stub.type.function.ACSFunctionStub
 import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiModifierList
-import com.intellij.psi.javadoc.PsiDocComment
-import com.intellij.psi.stubs.ILightStubElementType
+import com.intellij.psi.stubs.IStubElementType
+import com.intellij.psi.stubs.StubElement
 
-//TODO change this to mixin
-class ACSPsiFunctionImpl : ACSNamedStubBasedPsiElementBase<ACSFunctionStub>, ACSPsiFunction {
+abstract class ACSPsiFunctionImpl : ACSNamedStubBasedPsiElementBase<ACSFunctionStub>, ACSPsiFunction,
+    ACSFunctionDefinition {
     constructor(node: ASTNode) : super(node)
 
-    constructor(stub: ACSFunctionStub, nodeType: ILightStubElementType<*, *>) : super(stub, nodeType)
+    constructor(stub: ACSFunctionStub, nodeType: IStubElementType<StubElement<*>, PsiElement>) : super(stub, nodeType)
 
-    override fun getReturnType(): ACScriptType {
-        TODO("Need to provide a return type")
-    }
+    override fun getReturnType(): ACSFunctionReturnType? = functionReturnType
 
     override fun getName(): String = greenStub?.name ?: nameIdentifier?.text ?: text
 
-    override fun getNameIdentifier(): PsiElement? {
-        TODO("Not yet implemented")
-    }
+    override fun getNameIdentifier(): PsiElement? = node.psi ?: null
 
-    override fun getModifierList(): PsiModifierList? {
-        TODO("Not yet implemented")
-    }
-
-    override fun hasModifierProperty(name: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getContainingClass(): PsiClass? {
-        TODO("Not yet implemented")
-    }
-
-    override fun getParameterList(): ACScriptFunctionParameterList? {
-        TODO("Need to implement parameters")
-    }
+    override fun getParameterList(): ACSFunctionParameters? = functionParameters
 
     override fun isTypeCastFunction(): Boolean = false
 
     override fun isMultiCastFunction(): Boolean = false
-
-    override fun getDocComment(): PsiDocComment? = null
-
-    override fun isDeprecated(): Boolean = false
 }

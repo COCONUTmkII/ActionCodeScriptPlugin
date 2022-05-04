@@ -1,12 +1,10 @@
 package by.home.acs.language.psi
 
-import com.intellij.psi.PsiDocCommentOwner
+interface ACSPsiFunction : ACSNamedElement {
 
-interface ACSPsiFunction : ACSNamedElement, PsiDocCommentOwner {
+    fun getParameterList(): ACSFunctionParameters?
 
-    fun getParameterList(): ACScriptFunctionParameterList?
-
-    fun getReturnType(): ACScriptType //how to do it correctly
+    fun getReturnType(): ACSFunctionReturnType? //how to do it correctly
 
     /**
      * returns true if function is like print(i: <number>) function
