@@ -12,5 +12,5 @@ class ACSFileStubElementType(language: ACSLanguage): IStubFileElementType<ACSFil
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): ACSFileStub =
         ACSFileStub(null)
 
-    override fun getExternalId(): String = super.getExternalId() + ".FILE"
+    override fun getExternalId(): String = super.getExternalId() + ".ACS_FILE"
 }

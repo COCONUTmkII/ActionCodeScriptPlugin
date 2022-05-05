@@ -10,7 +10,7 @@ class ACSElementType(debugName: String?) : IElementType(debugName.toString(), AC
         @JvmStatic
         fun createTypes(type: String): IElementType {
             return when(type) {
-                "FUNCTION_DEFINITION" -> ACSFunctionElementType(type)
+                "FUNCTION_DECLARATION" -> ACSFunctionElementType(type)
                 else -> ACSElementType(type)
             }
         }

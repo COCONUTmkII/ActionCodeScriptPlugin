@@ -167,19 +167,19 @@
 
 ACSScriptFile ::= FileContainer
 
-private FileContainer ::= (END_OF_LINE_COMMENT | C_STYLE_BLOCK_COMMENT |Definition*)
+private FileContainer ::= (END_OF_LINE_COMMENT | C_STYLE_BLOCK_COMMENT |Declaration*)
 
-Definition ::= (FunctionDefinition | ScriptDefinition | DirectivesDeclaration | GlobalVarStatement | SpecialDefinition | VariableDefinition)
+Declaration ::= (FunctionDeclaration | ScriptDeclaration | DirectivesDeclaration | GlobalVarStatement | SpecialDeclaration | VariableDeclaration)
 
 /**
     Specials declaration
  */
 
-SpecialDefinition ::= SPECIAL SpecialExpression SEMICOLON
+SpecialDeclaration ::= SPECIAL SpecialExpression SEMICOLON
 
 SpecialExpression ::= (NUMBER COLON FunctionInvocation) (COMMA SpecialExpression)*
 
-FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
+FunctionDeclaration ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
 {
     pin = 1
     implements=["by.home.acs.language.psi.ACSElement"
@@ -188,7 +188,7 @@ FunctionDefinition ::= FUNCTION FunctionReturnType FunctionName FunctionParamete
     stubClass="by.home.acs.language.stub.type.function.ACSFunctionStub"
 }
 
-ScriptDefinition ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
+ScriptDeclaration ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
 
 /**
     Directives statement
@@ -302,7 +302,7 @@ SuspendStatement ::= SUSPEND SEMICOLON
 
 RestartStatement ::= RESTART SEMICOLON
 
-Statement ::= (StatementWithoutSub | IncrementOrDecrementExpression SEMICOLON | VariableDefinition | AssignmentStatement | FunctionInvocation SEMICOLON | IfThenElseStatement | IfThenStatement | Loops | SwitchLoop)
+Statement ::= (StatementWithoutSub | IncrementOrDecrementExpression SEMICOLON | VariableDeclaration | AssignmentStatement | FunctionInvocation SEMICOLON | IfThenElseStatement | IfThenStatement | Loops | SwitchLoop)
 
 StatementWithoutSub ::= (CodeBlock | BreakStatement | ContinueStatement | ReturnOperator | SuspendStatement | RestartStatement | TerminateStatement)
 
@@ -322,7 +322,7 @@ NegationExpression ::= '!' LiteralExpression
 
 AssignmentStatement ::= (ArrayReferenceExpression | VariableName) ASSIGN (FunctionInvocation SEMICOLON| VariableInitialization)
 
-VariableDefinition ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization))
+VariableDeclaration ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization))
 
 VariableName ::=  IDENTIFIER
         /*{
