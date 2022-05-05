@@ -33,7 +33,6 @@ END_LINE_COMMENT=("//")[^\r\n]*
 MULTIPLE_LINE_COMMENT="/*"( [^*] | (\*+[^*/]) )*\*+\/
 FLOAT = -?\d+(\.\d+)?
 EQUALS_SYMBOL = "="
-DOT_SYMBOL = "."
 COMMA_SYMBOL = ","
 OPEN_BRACE =  "{"
 CLOSE_BRACE = "}"

@@ -1,9 +1,7 @@
 package by.home.acs.language.annotator
 
 import by.home.acs.language.ACSTypes
-import by.home.acs.language.psi.ACSTokenType
-import by.home.acs.language.psi.ACScriptScriptName
-import by.home.acs.language.psi.ACScriptType
+import by.home.acs.language.psi.ACSScriptName
 import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.lang.ASTNode
 import com.intellij.lang.annotation.AnnotationHolder
@@ -17,10 +15,10 @@ import java.math.BigInteger
 object ACSScriptNumberAnnotator : Annotator {
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
-        if (element !is ACScriptScriptName) {
+        if (element !is ACSScriptName) {
             return
         }
-        val acsScriptScriptName: ACScriptScriptName = element
+        val acsScriptScriptName: ACSScriptName = element
         if (acsScriptScriptName.firstChild.elementType == ACSTypes.NUMBER) {
             checkScript(acsScriptScriptName.node, holder)
         }
