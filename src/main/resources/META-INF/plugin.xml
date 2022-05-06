@@ -34,5 +34,7 @@
                         implementationClass="by.home.acs.language.formatter.ACSFormattingModelBuilder"/>
         <lang.commenter language="ActionCodeScript" implementationClass="by.home.acs.language.commenter.ACSCommenter"/>
         <annotator language="ActionCodeScript" implementationClass="by.home.acs.language.annotator.ACSScriptNumberAnnotator"/>
+        <stubElementTypeHolder class="by.home.acs.language.ACSTypes"/>
+        <stubIndex implementation="by.home.acs.language.stub.index.ACSFunctionNameIndex"/>
     </extensions>
 </idea-plugin>

@@ -43,7 +43,7 @@ object ACSSyntaxHighlighter : SyntaxHighlighterBase() {
         ACSTypes.TERMINATE to KEY,
         ACSTypes.SUSPEND to KEY,
         ACSTypes.INT to KEY,
-        ACSTypes.VARIABLE_DEFINITION to KEY,
+        ACSTypes.VARIABLE_DECLARATION to KEY,
 
         ACSTypes.OPEN to SCRIPT_TYPE,
         ACSTypes.DEATH to SCRIPT_TYPE,
