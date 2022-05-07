@@ -1,15 +1,9 @@
 package by.home.acs.language.annotator
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
-
-class ACSAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
-
-    override fun getTestDataPath(): String {
-        return "by/home/acs/language/annotator"
-    }
+class ACSAnnotatorTest : ACSAnnotatorTestBase() {
 
     fun testBadScriptNumberAnnotator() {
-        myFixture.configureByFile("badScriptNumber.acs")
+        testAnnotator("annotator/badScriptNumber.acs")
     }
 
 }

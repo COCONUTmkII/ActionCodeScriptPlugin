@@ -100,6 +100,8 @@ tasks {
 
     dependencies {
         testImplementation("junit:junit:4.13.2")
+        testImplementation("org.assertj:assertj-core:3.22.0")
+
         testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
     }
 }
