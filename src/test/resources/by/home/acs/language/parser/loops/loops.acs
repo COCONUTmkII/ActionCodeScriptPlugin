@@ -1,0 +1,36 @@
+script "LOOPS" (void) {
+    while (1)
+    {
+        print(i: 15);
+    }
+
+    until (2)
+    {
+        print(i: 15);
+    }
+
+    do
+    {
+        print(i: 15);
+    } while (1);
+
+    do
+    {
+        print(i: 15);
+    } until (1);
+
+    for(int i = 0; i > 1; i++) {
+
+    }
+    int a = 1;
+    for(a = a++; a < 10; a++) {
+        if(a == 1)
+        {
+            continue;
+        }
+        if(a == 9)
+        {
+            break;
+        }
+    }
+}

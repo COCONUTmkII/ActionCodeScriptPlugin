@@ -1,0 +1,30 @@
+#include "zcommon.acs"
+
+str goals[3] = {"generators", "altars", "teleporters"};
+
+script 10 (int amount, int goaltype)
+{
+    SetFont("BIGFONT");
+    HudMessage(s:"You must find ",
+           d:amount, s:" ", l:goals[goaltype],
+           s:"\nand destroy them.";
+           HUDMSG_TYPEON | HUDMSG_LOG, 0, CR_TAN, 1.5, 0.8, 5.0,
+           0.05, 2.0);
+    int x = test();
+
+    print(i: 1);
+    print(s:"This is a string");
+    print(d:x);
+    print(s:"I need ", d:x, s:" shells");
+    print(b: 0101010);
+    print(c: '\n');
+    print(f: 1.1);
+    print(k: "+use");
+    print(l:goals[goaltype]);
+    print(n: PRINTNAME_LEVELNAME);
+    print(x: 0xD);
+}
+
+function int test(void) {
+    return 1;
+}

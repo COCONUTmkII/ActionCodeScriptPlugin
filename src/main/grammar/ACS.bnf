@@ -188,7 +188,7 @@ FunctionDeclaration ::= FUNCTION FunctionReturnType FunctionName FunctionParamet
     stubClass="by.home.acs.language.stub.type.function.ACSFunctionStub"
 }
 
-ScriptDeclaration ::= SCRIPT ScriptName (ScriptPossibleParams | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
+ScriptDeclaration ::= SCRIPT ScriptName (ScriptPossibleParams DISCONNECT? | ScriptType) (NET ClientsideType | NET | ClientsideType)? ScriptBody
 
 /**
     Directives statement
@@ -270,7 +270,7 @@ TypeCastName ::= 'n'
 
 TypeCastString ::= 's'
 
-TypeCastHex ::= 'h'
+TypeCastHex ::= 'x'
 
 FunctionInvokeParameters ::= BinaryExpression (COMMA BinaryExpression)*
 
@@ -366,9 +366,7 @@ private Initialization ::= EmptyInitialization | TypeInitialization
 
 EmptyInitialization ::= SEMICOLON
 
-TypeInitialization ::= STATIC? Type VariableList  ArithmeticInitialization* SEMICOLON
-
-private VariableList ::= RepeatableVariable ASSIGN (NUMBER | STRING | VariableName ) (COMMA VariableList)?//check logical type
+TypeInitialization ::= STATIC? (AssignmentStatement | VariableDeclaration)
 
 private ArithmeticInitialization ::= ArithmeticOperator (NUMBER | STRING | VariableName)
 

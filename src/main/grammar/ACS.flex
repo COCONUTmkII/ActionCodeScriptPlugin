@@ -95,12 +95,14 @@ NET="NET"
   "until"                                                   {yybegin(YYINITIAL); return ACSTypes.UNTIL;}
   "do"                                                      {yybegin(YYINITIAL); return ACSTypes.DO;}
   "break"                                                   {yybegin(YYINITIAL); return ACSTypes.BREAK;}
+  "continue"                                                {yybegin(YYINITIAL); return ACSTypes.CONTINUE;}
   "default"                                                 {yybegin(YYINITIAL); return ACSTypes.DEFAULT;}
   "if"                                                      {yybegin(YYINITIAL); return ACSTypes.IF;}
   "else"                                                    {yybegin(YYINITIAL); return ACSTypes.ELSE;}
   "return"                                                  {yybegin(YYINITIAL); return ACSTypes.RETURN;}
   "terminate"                                               {yybegin(YYINITIAL); return ACSTypes.TERMINATE;}
   "suspend"                                                 {yybegin(YYINITIAL); return ACSTypes.SUSPEND;}
+  "restart"                                                 {yybegin(YYINITIAL); return ACSTypes.RESTART;}
   {NUMBER}                                                  {yybegin(YYINITIAL); return ACSTypes.NUMBER;}
   {STRING}                                                  {yybegin(YYINITIAL); return ACSTypes.STRING;}
   {END_LINE_COMMENT}                                        {yybegin(YYINITIAL); return ACSTypes.END_OF_LINE_COMMENT;}

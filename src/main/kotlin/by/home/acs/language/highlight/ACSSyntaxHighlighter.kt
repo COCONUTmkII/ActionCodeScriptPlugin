@@ -26,6 +26,7 @@ object ACSSyntaxHighlighter : SyntaxHighlighterBase() {
         ACSTypes.SPECIAL to KEY,
         ACSTypes.RETURN to KEY,
         ACSTypes.BREAK to KEY,
+        ACSTypes.CONTINUE to KEY,
         ACSTypes.DEFAULT to KEY,
         ACSTypes.IF to KEY,
         ACSTypes.ELSE to KEY,
@@ -42,6 +43,7 @@ object ACSSyntaxHighlighter : SyntaxHighlighterBase() {
         ACSTypes.FUNCTION to KEY,
         ACSTypes.TERMINATE to KEY,
         ACSTypes.SUSPEND to KEY,
+        ACSTypes.RESTART to KEY,
         ACSTypes.INT to KEY,
         ACSTypes.VARIABLE_DECLARATION to KEY,
 
@@ -58,6 +60,8 @@ object ACSSyntaxHighlighter : SyntaxHighlighterBase() {
         ACSTypes.NET to SCRIPT_TYPE,
         ACSTypes.RESPAWN to SCRIPT_TYPE,
         ACSTypes.UNLOADING to SCRIPT_TYPE,
+        ACSTypes.LIGHTNING to SCRIPT_TYPE,
+        ACSTypes.KILL to SCRIPT_TYPE,
 
         ACSTypes.EMPTY_STRING to STRING_VALUE,
         ACSTypes.STRING to STRING_VALUE,

@@ -1,0 +1,21 @@
+function void test1(void) { return; }
+
+function int test2(void) {
+    return 1;
+}
+
+function str test3(void) {
+    return "string";
+}
+
+function bool test4(void) {
+    return 0;
+}
+
+function void test5(int a) {}
+
+function void test6(int a, int b) {}
+
+function int test7(int a, int b) {
+    return a + b;
+}

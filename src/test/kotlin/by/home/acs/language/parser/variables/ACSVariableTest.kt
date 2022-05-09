@@ -4,6 +4,6 @@ import by.home.acs.language.parser.ACSParserTestBase
 
 class ACSVariableTest : ACSParserTestBase("variables") {
 
-    fun testGlobalVar() = doTest()
+    fun testFileVar() = doParserTest()
 
 }
