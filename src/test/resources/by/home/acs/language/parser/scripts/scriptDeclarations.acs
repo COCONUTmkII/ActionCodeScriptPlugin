@@ -1,0 +1,38 @@
+script 1 (int a) {
+    restart;
+}
+
+script "test" (void)
+int a = 1;
+int b = 1;
+
+script 2 (int a, int b) {
+    terminate;
+}
+
+script 3 OPEN {
+    suspend;
+}
+
+script 4 OPEN NET {
+
+}
+
+script 5 OPEN NET CLIENTSIDE {
+
+}
+
+script 6 OPEN CLIENTSIDE {}
+script 7 ENTER {}
+script 8 RETURN {}
+script 9 RESPAWN {}
+script 10 DEATH {}
+script 11 LIGHTNING {}
+script 12 UNLOADING {}
+script 13 (int a) DISCONNECT {}
+script 14 KILL {}
+script 15 REOPEN {}
+script 16 PICKUP {}
+script 17 REDRETURN {}
+script 18 BLUERETURN {}
+script 19 WHITERETURN {}

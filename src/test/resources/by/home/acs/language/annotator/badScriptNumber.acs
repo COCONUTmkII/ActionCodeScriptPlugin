@@ -1,0 +1,3 @@
+script <error descr="Script number can be only > 1 and < 32767 inclusive"</error> 1234567 (void) {
+
+}

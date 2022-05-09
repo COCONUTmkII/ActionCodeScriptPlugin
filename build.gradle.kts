@@ -4,9 +4,10 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("org.jetbrains.intellij") version "1.4.0"
+    id("org.jetbrains.intellij") version "1.5.2"
     id("org.jetbrains.grammarkit") version "2021.2.2"
     id("org.sonarqube") version "3.3"
+    id("com.adarshr.test-logger") version "3.2.0"
 }
 
 group = "by.home"
@@ -100,6 +101,8 @@ tasks {
 
     dependencies {
         testImplementation("junit:junit:4.13.2")
+        testImplementation("org.assertj:assertj-core:3.22.0")
+
         testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
     }
 }
