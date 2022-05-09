@@ -1,7 +1,6 @@
 package by.home.acs.language.parser
 
 import by.home.acs.language.ACSFile
-import by.home.acs.language.ACSLanguage
 import by.home.acs.language.ACSTypes
 import by.home.acs.language.lexer.ACSLexerAdapter
 import by.home.acs.language.stub.type.file.ACSFileStubElementType
