@@ -2,7 +2,7 @@ package by.home.acs.language.annotator
 
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
 
-open class ACSAnnotatorTestBase : LightJavaCodeInsightFixtureTestCase() {
+abstract class ACSAnnotatorTestBase : LightJavaCodeInsightFixtureTestCase() {
 
     override fun getTestDataPath(): String = "src/test/resources"
 

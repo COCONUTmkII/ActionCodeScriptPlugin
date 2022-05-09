@@ -21,7 +21,6 @@ class ACSParserDefinition : ParserDefinition {
 
     private val whitespaces = TokenSet.create(TokenType.WHITE_SPACE)
     private val comments = TokenSet.create(ACSTypes.END_OF_LINE_COMMENT, ACSTypes.C_STYLE_BLOCK_COMMENT)
-    private val file = ACSFileStubElementType(ACSLanguage)
 
     override fun createLexer(project: Project?): Lexer {
         return ACSLexerAdapter()
@@ -44,7 +43,7 @@ class ACSParserDefinition : ParserDefinition {
     }
 
     override fun getFileNodeType(): IFileElementType {
-        return file
+        return ACSFileStubElementType.INSTANCE
     }
 
     override fun spaceExistenceTypeBetweenTokens(left: ASTNode?, right: ASTNode?): ParserDefinition.SpaceRequirements {
