@@ -1,6 +1,7 @@
 package by.home.acs.language.annotator
 
-class ACSAnnotatorTest : ACSAnnotatorTestBase() {
+import by.home.acs.language.ACSTestBase
+class ACSAnnotatorTest : ACSTestBase() {
 
     fun testBadScriptNumberAnnotator() {
         testAnnotator("annotator/badScriptNumber.acs")
