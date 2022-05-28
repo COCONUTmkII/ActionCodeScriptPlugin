@@ -1,19 +1,14 @@
 package by.home.acs.language.commenter
 
-import by.home.acs.language.ACSFileType
 import by.home.acs.language.ACSTestBase
 
 abstract class ACSCommenterTestBase : ACSTestBase() {
+    private val pathToFolder = getPathToFolder("/commenter/")
 
-    abstract val commentType: String
-
-    protected fun doCommenterTest(before: String, after: String) =
-        testCommentFileByText(before, after) { myFixture.performEditorAction(commentType) }
-
-
-    private fun testCommentFileByText(before: String, after: String, action: () -> Unit) {
-        myFixture.configureByText(ACSFileType, before.trimIndent())
-        action()
-        myFixture.checkResult(after.trimIndent())
+    protected fun testCommenter(fileName: String, actionId: String) {
+        val file = getTestName("$pathToFolder$fileName.acs", true)
+        myFixture.configureByFile(file)
+        myFixture.performEditorAction(actionId)
+        myFixture.checkResultByFile("$pathToFolder$fileName.txt")
     }
 }

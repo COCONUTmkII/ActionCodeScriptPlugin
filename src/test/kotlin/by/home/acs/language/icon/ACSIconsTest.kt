@@ -8,7 +8,7 @@ import javax.swing.Icon
 class ACSIconsTest {
 
     @Test
-    fun `get file icon`() {
+    fun getFileIcon() {
         val icon: Icon = IconLoader.getIcon("/icons/acs_icon.png", ACSIcons.javaClass)
         assertNotNull(icon)
     }
