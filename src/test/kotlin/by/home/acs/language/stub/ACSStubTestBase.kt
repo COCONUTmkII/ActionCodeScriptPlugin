@@ -7,16 +7,18 @@ import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.impl.DebugUtil
-import com.intellij.testFramework.ParsingTestCase
+import com.intellij.testFramework.ParsingTestCase.doCheckResult
 import java.io.File
 
 abstract class ACSStubTestBase : ACSTestBase() {
+    private val pathToFolder = getPathToFolder("/stub/")
+
     fun testStub(pathWithFile: String) {
-        val file = getTestName("by/home/acs/language/stub/$pathWithFile.acs", true)
+        val file = getTestName("$pathToFolder$pathWithFile.acs", true)
         val text = FileUtil.loadFile(File(testDataPath, file))
         val psiFile = myFixture.addFileToProject(file, text)
         val stubTreeText = testStubText(project, psiFile.virtualFile, text)
-        ParsingTestCase.doCheckResult(testDataPath, getTestName("by/home/acs/language/stub/$pathWithFile.txt", true), stubTreeText)
+        doCheckResult(testDataPath, getTestName("$pathToFolder$pathWithFile.txt", true), stubTreeText)
     }
 
     private fun testStubText(project: Project, file: VirtualFile, fileContent: String): String {
