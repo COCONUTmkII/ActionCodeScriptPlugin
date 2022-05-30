@@ -7,7 +7,7 @@ abstract class ACSAnnotatorTestBase : ACSTestBase() {
 
     protected fun testAnnotator(@Language("ActionCodeScript")  path: String) {
         myFixture.configureByFile(getPathToFolder(path))
-        myFixture.checkHighlighting(false, false, true, true)
+        myFixture.checkHighlighting(false, false, true, false)
     }
 
 }
