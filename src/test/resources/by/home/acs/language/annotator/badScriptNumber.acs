@@ -1,3 +1,1 @@
-script <error descr="Script number can be only > 1 and < 32767 inclusive" 1234567</error> (void) {
-
-}
+script <error descr="Script number can be only > 1 and < 32767 inclusive">1234567</error> (void) {}
