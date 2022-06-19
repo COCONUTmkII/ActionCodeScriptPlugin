@@ -2,7 +2,7 @@ package by.home.acs.language.stub.type.function
 
 import by.home.acs.language.ACSTypes
 import by.home.acs.language.psi.ACSPsiFunction
-import by.home.acs.language.psi.impl.ACSFunctionDeclarationImpl
+import by.home.acs.language.psi.impl.ACSFunctionDeclarationMixin
 import by.home.acs.language.stub.index.ACSFunctionNameIndex
 import by.home.acs.language.stub.type.ACSNamedStubElementType
 import com.intellij.lang.LighterAST
@@ -28,7 +28,8 @@ class ACSFunctionElementType(debugName: String) :
         return ACSFunctionStub(parentStub, this, functionName)
     }
 
-    override fun createPsi(stub: ACSFunctionStub): ACSPsiFunction = ACSFunctionDeclarationImpl(stub, this)
+    override fun createPsi(stub: ACSFunctionStub): ACSPsiFunction =
+        ACSFunctionDeclarationMixin(stub, this)
 
 
     override fun serialize(stub: ACSFunctionStub, dataStream: StubOutputStream) {
