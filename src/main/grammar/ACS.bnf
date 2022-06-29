@@ -179,9 +179,8 @@ SpecialDeclaration ::= SPECIAL SpecialExpression SEMICOLON
 
 SpecialExpression ::= (NUMBER COLON FunctionInvocation) (COMMA SpecialExpression)*
 
-FunctionDeclaration ::= FUNCTION FunctionReturnType FunctionName FunctionParameters FunctionBody
+FunctionDeclaration ::= FUNCTION FunctionReturnType FunctionName FunctionParameters CodeBlock
 {
-    pin = 1
     implements=["by.home.acs.language.psi.ACSElement"
                 "by.home.acs.language.psi.ACSPsiFunction"]
     mixin="by.home.acs.language.psi.mixin.ACSPsiFunctionMixin"
@@ -289,8 +288,6 @@ FunctionParameter ::=  (VOID | FunctionParameterList)
 FunctionParameterList ::= FunctionFormalParameter (COMMA FunctionFormalParameter)*
 
 FunctionFormalParameter ::= Type VariableName
-
-FunctionBody ::= LBRACE Statement* RBRACE
 
 /**
 

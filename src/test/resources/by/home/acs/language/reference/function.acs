@@ -1,0 +1,4 @@
+function void <caret>foo(void) {
+    int a = 1;
+}
+
