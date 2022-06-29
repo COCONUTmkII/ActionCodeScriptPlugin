@@ -23,4 +23,8 @@ abstract class ACSBaseReference(val psiElement: PsiElement, range: TextRange) :
         val resolveResults = multiResolve(false)
         return if (resolveResults.size == 1) resolveResults[0].element else null
     }
+
+    override fun getVariants(): Array<Any> {
+        return resolveInner(true).toTypedArray()
+    }
 }

@@ -279,7 +279,7 @@ FunctionReturnType ::= VOID | Type
 FunctionName ::= IDENTIFIER
 {
     implements=['by.home.acs.language.psi.ACSElement']
-    //mixin
+    mixin="by.home.acs.language.psi.mixin.ACSFunctionNameMixin"
 }
 
 FunctionParameters ::= LPAR FunctionParameter RPAR
