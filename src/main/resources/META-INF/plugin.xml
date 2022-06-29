@@ -30,8 +30,6 @@
                                implementationClass="by.home.acs.language.parser.ACSParserDefinition"/>
         <lang.syntaxHighlighterFactory language="ActionCodeScript"
                                        implementationClass="by.home.acs.language.highlight.ACSSyntaxHighlightFactory"/>
-        <lang.formatter language="ActionCodeScript"
-                        implementationClass="by.home.acs.language.formatter.ACSFormattingModelBuilder"/>
         <lang.commenter language="ActionCodeScript" implementationClass="by.home.acs.language.commenter.ACSCommenter"/>
         <annotator language="ActionCodeScript" implementationClass="by.home.acs.language.annotator.ACSScriptNumberAnnotator"/>
         <stubElementTypeHolder class="by.home.acs.language.ACSTypes"/>

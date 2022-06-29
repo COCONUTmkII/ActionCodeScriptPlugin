@@ -28,7 +28,8 @@ class ACSFunctionElementType(debugName: String) :
         return ACSFunctionStub(parentStub, this, functionName)
     }
 
-    override fun createPsi(stub: ACSFunctionStub): ACSPsiFunction = ACSFunctionDeclarationImpl(stub, this)
+    override fun createPsi(stub: ACSFunctionStub): ACSPsiFunction =
+        ACSFunctionDeclarationImpl(stub, this)
 
 
     override fun serialize(stub: ACSFunctionStub, dataStream: StubOutputStream) {
