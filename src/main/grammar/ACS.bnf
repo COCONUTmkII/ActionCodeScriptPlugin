@@ -293,7 +293,23 @@ FunctionFormalParameter ::= Type VariableName
 
  */
 
-GlobalVarStatement ::= (GLOBAL | WORLD) Type NUMBER COLON IDENTIFIER SEMICOLON
+GlobalVarStatement ::= GlobalVarModifier Type NUMBER COLON GlobalVarName SEMICOLON
+{
+    implements=["by.home.acs.language.psi.ACSElement"
+                "by.home.acs.language.psi.ACSPsiGlobalVar"]
+    mixin="by.home.acs.language.psi.mixin.ACSPsiGlobalVarMixin"
+    stubClass="by.home.acs.language.stub.type.var.global.ACSGlobalVarStub"
+}
+
+GlobalVarModifier ::= GLOBAL | WORLD
+
+GlobalVarName ::= IDENTIFIER
+{
+    implements=['by.home.acs.language.psi.ACSElement']
+}
+/**
+
+ */
 
 ClientsideType ::= CLIENTSIDE
 

@@ -1,0 +1,3 @@
+PsiFileStubImpl
+  GLOBAL_VAR_STATEMENT:ACSGlobalVarStub
+  GLOBAL_VAR_STATEMENT:ACSGlobalVarStub

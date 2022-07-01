@@ -7,12 +7,10 @@ import by.home.acs.language.stub.index.ACSFunctionNameIndex
 import by.home.acs.language.stub.type.ACSNamedStubElementType
 import com.intellij.lang.LighterAST
 import com.intellij.lang.LighterASTNode
-import com.intellij.lang.LighterASTTokenNode
 import com.intellij.psi.impl.source.tree.LightTreeUtil
 import com.intellij.psi.stubs.StubElement
 import com.intellij.psi.stubs.StubInputStream
 import com.intellij.psi.stubs.StubOutputStream
-import com.intellij.util.CharTable
 
 class ACSFunctionElementType(debugName: String) :
     ACSNamedStubElementType<ACSFunctionStub, ACSPsiFunction>(debugName) {
@@ -43,8 +41,4 @@ class ACSFunctionElementType(debugName: String) :
 
     override fun getExternalId(): String = super.getExternalId() + ".FUNCTION"
 
-    private fun intern(charTable: CharTable, functionNode: LighterASTNode): String {
-        assert(functionNode is LighterASTTokenNode) { functionNode }
-        return charTable.intern((functionNode as LighterASTTokenNode).text).toString()
-    }
 }

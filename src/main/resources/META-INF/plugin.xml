@@ -34,5 +34,6 @@
         <annotator language="ActionCodeScript" implementationClass="by.home.acs.language.annotator.ACSScriptNumberAnnotator"/>
         <stubElementTypeHolder class="by.home.acs.language.ACSTypes"/>
         <stubIndex implementation="by.home.acs.language.stub.index.ACSFunctionNameIndex"/>
+        <stubIndex implementation="by.home.acs.language.stub.index.ACSGlobalVarNameIndex"/>
     </extensions>
 </idea-plugin>
