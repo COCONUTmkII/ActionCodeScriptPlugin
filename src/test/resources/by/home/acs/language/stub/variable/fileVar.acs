@@ -1,0 +1,18 @@
+int a = 1;
+str b = "test";
+bool c = 1;
+
+world str 1 : d;
+global int 1 : e;
+
+int f;
+str g;
+bool h;
+
+int i[0];
+str j[10];
+bool k[10];
+
+int l[3] = {1, 2, 3};
+str m[2] = {"test", "test2"};
+bool n[1] = {1};
