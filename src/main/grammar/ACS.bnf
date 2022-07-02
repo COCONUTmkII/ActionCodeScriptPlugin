@@ -293,7 +293,7 @@ FunctionFormalParameter ::= Type VariableName
 
  */
 
-GlobalVarStatement ::= GlobalVarModifier Type NUMBER COLON GlobalVarName SEMICOLON
+GlobalVarStatement ::= GlobalVarModifier Type NUMBER COLON VariableName SEMICOLON
 {
     implements=["by.home.acs.language.psi.ACSElement"
                 "by.home.acs.language.psi.ACSPsiGlobalVar"]
@@ -303,10 +303,6 @@ GlobalVarStatement ::= GlobalVarModifier Type NUMBER COLON GlobalVarName SEMICOL
 
 GlobalVarModifier ::= GLOBAL | WORLD
 
-GlobalVarName ::= IDENTIFIER
-{
-    implements=['by.home.acs.language.psi.ACSElement']
-}
 /**
 
  */
@@ -342,12 +338,10 @@ AssignmentStatement ::= (ArrayReferenceExpression | VariableName) ASSIGN (Functi
 VariableDeclaration ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization))
 
 VariableName ::=  IDENTIFIER
-        /*{
-            implements="by.home.acs.language.psi.ACSVariableElement"
-            mixin="by.home.acs.language.psi.impl.ACSVariableElementImpl"
-            methods=[getName changeName getNameIdentifier getReference]
-            stubClass="by.home.acs.language.stub.variable.ACSVariableStub"
-        }*/
+{
+    implements=['by.home.acs.language.psi.ACSElement']
+    mixin="by.home.acs.language.psi.mixin.ACSGlobalVarNameMixin"
+}
 
 RepeatableVariable ::= VariableName (COMMA RepeatableVariable)*
 
