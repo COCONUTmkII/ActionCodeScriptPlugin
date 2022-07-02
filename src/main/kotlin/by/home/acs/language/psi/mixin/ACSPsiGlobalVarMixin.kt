@@ -17,9 +17,9 @@ abstract class ACSPsiGlobalVarMixin : ACSNamedStubBasedPsiElementBase<ACSGlobalV
 
     constructor(stub: ACSGlobalVarStub, nodeType: IStubElementType<StubElement<*>, PsiElement>) : super(stub, nodeType)
 
-    override fun getNameIdentifier(): PsiElement? = globalVarName.identifier
+    override fun getNameIdentifier(): PsiElement? = variableName.identifier
 
-    override fun getName(): String? = globalVarName.text ?: nameIdentifier?.text ?: text
+    override fun getName(): String? = variableName.text ?: nameIdentifier?.text ?: text
 
     override fun getGlobalVarType(): ACSType = type
 

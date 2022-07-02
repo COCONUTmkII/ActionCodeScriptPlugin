@@ -23,7 +23,7 @@ class ACSGlobalVarElementType(debugName: String) :
 
 
     override fun createStub(tree: LighterAST, node: LighterASTNode, parentStub: StubElement<*>): ACSGlobalVarStub {
-        val globalVarNode = LightTreeUtil.firstChildOfType(tree, node, ACSTypes.GLOBAL_VAR_NAME)
+        val globalVarNode = LightTreeUtil.firstChildOfType(tree, node, ACSTypes.VARIABLE_NAME)
         val globalVarName = globalVarNode?.let { intern(tree.charTable, it) }
         return ACSGlobalVarStub(parentStub, this, globalVarName)
     }
