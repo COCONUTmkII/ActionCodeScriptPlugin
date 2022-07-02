@@ -35,5 +35,6 @@
         <stubElementTypeHolder class="by.home.acs.language.ACSTypes"/>
         <stubIndex implementation="by.home.acs.language.stub.index.ACSFunctionNameIndex"/>
         <stubIndex implementation="by.home.acs.language.stub.index.ACSGlobalVarNameIndex"/>
+        <stubIndex implementation="by.home.acs.language.stub.index.ACSVariableNameIndex"/>
     </extensions>
 </idea-plugin>
