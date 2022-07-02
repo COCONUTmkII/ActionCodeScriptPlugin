@@ -336,6 +336,12 @@ NegationExpression ::= '!' LiteralExpression
 AssignmentStatement ::= (ArrayReferenceExpression | VariableName) ASSIGN (FunctionInvocation SEMICOLON| VariableInitialization)
 
 VariableDeclaration ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | (ASSIGN VariableInitialization))
+{
+    implements=["by.home.acs.language.psi.ACSElement"
+                "by.home.acs.language.psi.ACSPsiVariable"]
+    mixin="by.home.acs.language.psi.mixin.ACSPsiVariableMixin"
+    stubClass="by.home.acs.language.stub.type.var.ACSVariableStub"
+}
 
 VariableName ::=  IDENTIFIER
 {
