@@ -1,5 +1,7 @@
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.lang.System.getenv
 
 plugins {
     id("java")
@@ -66,7 +68,7 @@ tasks {
         sourceCompatibility = "11"
         targetCompatibility = "11"
     }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
         dependsOn(generateACSLexer, generateACSParser)
     }
@@ -90,13 +92,13 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+        certificateChain.set(getenv("CERTIFICATE_CHAIN"))
+        privateKey.set(getenv("PRIVATE_KEY"))
+        password.set(getenv("PRIVATE_KEY_PASSWORD"))
     }
 
     publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
+        token.set(getenv("PUBLISH_TOKEN"))
     }
 
     dependencies {
