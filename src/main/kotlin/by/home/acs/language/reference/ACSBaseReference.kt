@@ -1,8 +1,10 @@
 package by.home.acs.language.reference
 
+import by.home.acs.language.psi.ACSNamedElement
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
 import com.intellij.psi.impl.source.resolve.ResolveCache
+import com.intellij.psi.util.parentOfType
 
 abstract class ACSBaseReference(val psiElement: PsiElement, range: TextRange) :
     PsiReferenceBase<PsiElement?>(psiElement, range), PsiPolyVariantReference {
@@ -27,4 +29,10 @@ abstract class ACSBaseReference(val psiElement: PsiElement, range: TextRange) :
     override fun getVariants(): Array<Any> {
         return resolveInner(true).toTypedArray()
     }
+
+    protected val elementOwner: PsiElement?
+        get() {
+            val owner = psiElement.parentOfType<ACSNamedElement>()
+            return if (owner?.nameIdentifier === psiElement) owner else null
+        }
 }

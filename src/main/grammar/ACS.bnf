@@ -345,6 +345,7 @@ VariableDeclaration ::= STATIC? Type RepeatableVariable ArrayType* (SEMICOLON | 
 
 VariableName ::=  IDENTIFIER
 {
+    //TODO ACSPsiVariable instead
     implements=['by.home.acs.language.psi.ACSElement']
     mixin="by.home.acs.language.psi.mixin.ACSGlobalVarNameMixin"
 }
