@@ -3,8 +3,8 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("org.jetbrains.intellij") version "1.5.2"
+    id("org.jetbrains.kotlin.jvm") version "1.9.0"
+    id("org.jetbrains.intellij") version "1.15.0"
     id("org.jetbrains.grammarkit") version "2021.2.2"
     id("org.sonarqube") version "3.3"
     id("com.adarshr.test-logger") version "3.2.0"
@@ -35,7 +35,7 @@ repositories {
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
-    version.set("2021.2")
+    version.set("2022.3")
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf("java"))
@@ -63,11 +63,11 @@ val generateACSParser = task<GenerateParserTask>("GenerateParser") {
 tasks {
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "17"
         dependsOn(generateACSLexer, generateACSParser)
     }
 
@@ -85,8 +85,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("212")
-        untilBuild.set("222.*")
+        sinceBuild.set("222")
+        untilBuild.set("232.*")
     }
 
     signPlugin {
@@ -103,6 +103,8 @@ tasks {
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.assertj:assertj-core:3.22.0")
 
-        testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
+        testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.9.1")
     }
 }
